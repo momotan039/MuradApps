@@ -14,6 +14,7 @@ namespace MuradApps
         [STAThread]
         static void Main()
         {
+            DbContextHelper.Controller.Database.EnsureCreated();
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

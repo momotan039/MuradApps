@@ -27,9 +27,9 @@ namespace MuradApps
         {
             this.img = Image.FromFile(@"../../../images/DoubleLine.png");
         }
-        public override double Total()
+        public override double TotalLengthCm()
         {
-            return base.Total()+height;
+            return base.TotalLengthCm()+height;
         }
     }
 

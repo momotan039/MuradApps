@@ -28,9 +28,9 @@ namespace MuradApps
         {
             this.img = Image.FromFile(@"../../../images/LightingStrike.png");
         }
-        public override double Total()
+        public override double TotalLengthCm()
         {
-            return base.Total()+width+curvedHeight;
+            return base.TotalLengthCm()+width+curvedHeight;
         }
     }
 }

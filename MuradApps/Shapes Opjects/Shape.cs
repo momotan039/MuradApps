@@ -17,7 +17,7 @@ namespace MuradApps
         protected abstract void InitlizeImage();
         
         public abstract Image CustomizeImage();
-        public abstract double Total();
+        public abstract double TotalLengthCm();
     }
     
    

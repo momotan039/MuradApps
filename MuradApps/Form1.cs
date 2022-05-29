@@ -17,6 +17,7 @@ namespace MuradApps
         //200 15 500 10  662k
         static string lastShapeSelected;
         static Shape shape=null;
+        List<Item> items=new List<Item> ();
         public Form1()
         {
             InitializeComponent();
@@ -27,41 +28,104 @@ namespace MuradApps
             var quturs = new object[] { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 25 };
             comboBox1.Items.AddRange(quturs);
             InitListViewShapes();
+
         }
-        private void button1_Click(object sender, EventArgs e)
+        private bool ValidationInputs()
         {
             if (lastShapeSelected == null)
             {
                 MessageBox.Show("נא לבחור את הצורה !! ");
-                return;
+                listView1.Focus();
+                return false;
             }
-
-            if (numsTB.Text == "" || comboBox1.SelectedItem == null)
+            if (comboBox1.SelectedItem == null)
             {
-                MessageBox.Show("נא למלא את כל השדודת");
-                return;
+                MessageBox.Show("נא לבחור את הקוטר");
+                comboBox1.Focus();
+                return false;
             }
+            if (numsTB.Text == "")
+            {
+                MessageBox.Show("נא לכניס מספר המוטות");
+                numsTB.Focus();
+                return false;
+            }
+            if (widthTB.Text == "")
+            {
+                MessageBox.Show("נא לכניס את הרוחב");
+                widthTB.Focus();
+                return false;
+            }
+            if (heightTB.Enabled == true && heightTB.Text == "")
+            {
+                MessageBox.Show("נא לכניס את הגובה");
+                heightTB.Focus();
+                return false;
+            }
+        
+            if (tailsTB.Enabled == true && tailsTB.Text == "")
+            {
+                MessageBox.Show("נא לכניס רוחב חיצוני");
+                tailsTB.Focus();
+                return false ;
+            }
+            return true;
+        }
+        private void AddBtn_Click(object sender, EventArgs e)
+        {
+            //check if not empty inputs 
+            if (!ValidationInputs())
+                return;
+            //get shape by selected image
             shape = CheckedWhichShapeInit();
-            double totalM = shape.Total() / 100;
+
+            double totalM = shape.TotalLengthCm() / 100;
+            var item = new Item { 
+            id=000,
+            nums= numsTB.Text,
+            totalm= totalM+"",
+            qutur= comboBox1.SelectedItem + "",
+            weight= CalculateWidth(totalM) + "",
+            shape= shape,
+            };
+                items.Add(item);
+            FillGridView();
+        }
+
+        private void FillGridView()
+        {
+            dataGridView1.Rows.Clear();
+            int i = 1;
+            foreach (var item in items)
+            {
+                dataGridView1.Rows.Add(
+                    item.id,i++,
+                 item.nums,
+                 item.qutur,
+                 item.totalm, item.weight,
+                 item.shape.CustomizeImage());
+            }
+            
+        }
+
+        private double CalculateWidth(double totalM)
+        {
             double weight = 0;
             if (shape is CircularDoubleLine)
                 weight = 0.222 * totalM * double.Parse(numsTB.Text);
             else
                 weight = double.Parse(numsTB.Text) * 0.00616 * totalM * Math.Pow(double.Parse(comboBox1.SelectedItem.ToString()), 2);
-
-            dataGridView1.Rows.Add(ItemList.index++,numsTB.Text,comboBox1.SelectedItem, totalM,weight, shape.CustomizeImage());
-            lastShapeSelected = null;
-            numsTB.Text = "";
-            comboBox1.SelectedItem = null;
+       return Math.Round(weight,2);
         }
         private Shape CheckedWhichShapeInit()
         {
             Shape shape=null;
             double width = 0, height = 0, tails = 0 ;
             width = double.Parse(widthTB.Text);
-            height= double.Parse(heightTB.Text);
             if(tailsTB.Text!="")
             tails= double.Parse(tailsTB.Text);
+            if (heightTB.Text != "")
+                height = double.Parse(heightTB.Text);
             if (lastShapeSelected == "Line")
                 shape = new Line(width);
             else if (lastShapeSelected == "LightingStrike")
@@ -92,6 +156,7 @@ namespace MuradApps
             string[] paths = Directory.GetFiles(@"../../../images/");
             ImageList imgs = new ImageList();
             imgs.ImageSize = new Size(100, 100);
+
             foreach (string path in paths)
             {
                 imgs.Images.Add(Image.FromFile(path));
@@ -117,14 +182,60 @@ namespace MuradApps
             if (lastShapeSelected == "RectangleMissOneWithTails" || lastShapeSelected== "CurvedRectangleMissOneWithTails")
                 tailsTB.Enabled = true;
             else
-                tailsTB.Enabled = false;    
-
-            listView1.SelectedItems.Clear();
+                tailsTB.Enabled = false;
+            if (lastShapeSelected != "Line")
+                heightTB.Enabled = true;
+            else
+                heightTB.Enabled = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var r = dataGridView1.CurrentRow;
+            if(r!=null)
+            MessageBox.Show(r.Index + "");
+        }
+
+        private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+           
+        }
+
+        private void DeleteBtn_Click(object sender, EventArgs e)
+        {
+           var r= dataGridView1.CurrentRow;
+            if(r==null)
+            {
+                MessageBox.Show("נא לבחור שורה בכדי להמשיך");
+                return;
+            }
+            var res = MessageBox.Show("האם ברצונך להמשיך","סים לב",MessageBoxButtons.YesNo);
+            if (res == DialogResult.No)
+                return;
+            else
+            {
+                int id=int.Parse(r.Cells[0].Value + "");
+                var item = items.FirstOrDefault(i=>i.id==id);
+                if (item == null)
+                {
+                    MessageBox.Show("this Item not found");
+                }    
+
+                    items.Remove(item);
+                FillGridView();
+            }
+        }
+
+        
     }
 }

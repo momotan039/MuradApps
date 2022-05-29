@@ -27,9 +27,9 @@ namespace MuradApps
         {
             this.img = Image.FromFile(@"../../../images/Rectangle.png");
         }
-        public override double Total()
+        public override double TotalLengthCm()
         {
-            return base.Total()+width+height;
+            return base.TotalLengthCm()+width+height;
         }
     }
 

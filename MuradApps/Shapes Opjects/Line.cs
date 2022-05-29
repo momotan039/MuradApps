@@ -7,6 +7,7 @@ namespace MuradApps
 {
     class Line : Shape
     {
+        
         public Line(double width)
             : base(width)
         {
@@ -21,13 +22,10 @@ namespace MuradApps
             g.Dispose();
             return img;
         }
-
-        public override double Total()
+        public override double TotalLengthCm()
         {
             return width;
         }
-
-
         protected override void InitlizeImage()
         {
             this.img = Image.FromFile(@"../../../images/Line.png");

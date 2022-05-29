@@ -21,7 +21,7 @@ namespace MuradApps
         public override Image CustomizeImage()
         {
             Graphics g = Graphics.FromImage(img);
-            Font f = new Font("tahoma", 50, FontStyle.Bold);
+            Font f = new Font("tahoma", 70, FontStyle.Bold);
             Brush b = Brushes.Red;
             g.DrawString(width + "", f, b, new PointF(500, 20));
             g.DrawString(height + "", f, b, new PointF(300, 200));
@@ -31,9 +31,9 @@ namespace MuradApps
             g.Dispose();
             return img;
         }
-        public override double Total()
+        public override double TotalLengthCm()
         {
-            return base.Total() +height-width+(tails*2);
+            return base.TotalLengthCm() +height-width+(tails*2);
         }
     }
 

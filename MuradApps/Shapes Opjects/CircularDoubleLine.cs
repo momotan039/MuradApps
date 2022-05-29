@@ -25,9 +25,9 @@ namespace MuradApps
         {
             this.img = Image.FromFile(@"../../../images/CircularDoubleLine.png");
         }
-        public override double Total()
+        public override double TotalLengthCm()
         {
-            return base.Total()+width;
+            return base.TotalLengthCm()+width;
         }
     }
 }

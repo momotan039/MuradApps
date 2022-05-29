@@ -28,9 +28,9 @@ namespace MuradApps
             g.Dispose();
             return img;
         }
-        public override double Total()
+        public override double TotalLengthCm()
         {
-            return base.Total();
+            return base.TotalLengthCm();
         }
 
     }
