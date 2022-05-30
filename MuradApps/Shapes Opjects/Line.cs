@@ -7,7 +7,7 @@ namespace MuradApps
 {
     class Line : Shape
     {
-        
+     
         public Line(double width)
             : base(width)
         {

@@ -6,8 +6,11 @@ namespace MuradApps
     internal class DbContextHelper: DbContext
     {
         public static DbContextHelper Controller = new DbContextHelper();
-        DbSet<Item> Items { get; set; }
-      //  DbSet<Line> Lines { get; set; }
+        public DbSet<ItemSql> Items { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        //id nums qutur lenM weightK shapeId
+       
+        //DbSet<Line> Lines { get; set; }
         //DbSet<DoubleLine> DoubleLines { get; set; }
         //DbSet<LightingStrike> LightingStrikes { get; set; }
         //DbSet<Rectangle> Rectangles { get; set; }
