@@ -80,30 +80,41 @@ namespace MuradApps
             shape = CheckedWhichShapeInit();
 
             double totalM = shape.TotalLengthCm() / 100;
-            var item = new Item { 
-            id=000,
-            nums= numsTB.Text,
-            totalm= totalM+"",
-            qutur= comboBox1.SelectedItem + "",
-            weight= CalculateWidth(totalM) + "",
-            shape= shape,
+            var item = new ItemSql { 
+            nums= int.Parse(numsTB.Text),
+            totalm= totalM,
+            qutur= int.Parse(comboBox1.SelectedItem+""),
+            weight= CalculateWidth(totalM),
+            nameShape=lastShapeSelected,
             };
-                items.Add(item);
+            //add item to database
+            DbContextHelper.Controller.Items.Add(item);
+            //int idLastItem = DbContextHelper.Controller.Items.OrderBy(o=>o.id).LastOrDefault().id;
+            item = DbContextHelper.Controller.Items.LastOrDefault();
+            //add order to database
+            DbContextHelper.Controller.Orders.Add(new Order
+            {
+                idItem = item.id,
+            });
+            DbContextHelper.Controller.SaveChanges();
             FillGridView();
         }
 
         private void FillGridView()
         {
             dataGridView1.Rows.Clear();
+            var orders = DbContextHelper.Controller.Orders.ToList();
             int i = 1;
-            foreach (var item in items)
+            foreach (var order in orders)
             {
+                var item = DbContextHelper.Controller.Items.FirstOrDefault(i=>i.id==order.idItem);
+                
                 dataGridView1.Rows.Add(
                     item.id,i++,
                  item.nums,
                  item.qutur,
-                 item.totalm, item.weight,
-                 item.shape.CustomizeImage());
+                 item.totalm, item.weight
+                );
             }
             
         }
@@ -161,7 +172,6 @@ namespace MuradApps
             {
                 imgs.Images.Add(Image.FromFile(path));
             }
-
             listView1.LargeImageList = imgs;
             listView1.Items.Add("CircularDoubleLine", 0);
             listView1.Items.Add("CurvedRectangleMissOneWithTails", 1);

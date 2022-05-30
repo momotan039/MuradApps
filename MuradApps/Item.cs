@@ -10,8 +10,10 @@ namespace MuradApps
         public string weight { get; set; }
         public string totalm { get; set; }
         public string nums { get; set; }
+        public string nameShape { get; set; } 
         public int id { get; set; }
 
-        public Shape shape;
+        public static int ID = 100;
+        public Shape shape { get; set; }
     }
 }
