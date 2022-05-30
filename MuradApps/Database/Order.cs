@@ -7,8 +7,9 @@ namespace MuradApps
     internal class Order
     {
         public int id { get; set; }
+        public int qutur { get; set; }
+        public int nums { get; set; }
         public int idItem { get; set; }
-
-        virtual public ItemSql item { get; set; }
+        public DateTime date { get; set; }
     }
 }
