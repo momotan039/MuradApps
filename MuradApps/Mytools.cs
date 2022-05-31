@@ -71,7 +71,6 @@ namespace MuradApps
                  shape.CustomizeImage()
                 );
             }
-
         }
         public static double CalculateWidth(double totalM, Order order)
         {

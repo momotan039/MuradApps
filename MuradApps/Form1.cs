@@ -1,4 +1,7 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using OfficeOpenXml.Drawing;
+using OfficeOpenXml.Style;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,7 +11,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace MuradApps
 {
     public partial class Form1 : Form
@@ -97,7 +99,6 @@ namespace MuradApps
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -158,5 +159,78 @@ namespace MuradApps
         {
 
         }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            var img=dataGridView1.Rows[0].Cells[7].Value as Image;
+            //img.Save("imgExcel.png");
+            // Creating an instance
+            // of ExcelPackage
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+
+            ExcelPackage excel = new ExcelPackage();
+
+            // name of the sheet
+            var workSheet = excel.Workbook.Worksheets.Add("Sheet1");
+
+            // setting the properties
+            // of the work sheet 
+            workSheet.TabColor = System.Drawing.Color.Black;
+            workSheet.DefaultRowHeight = 12;
+
+            // Setting the properties
+            // of the first row
+            workSheet.Row(1).Height = 20;
+            workSheet.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Row(1).Style.Font.Bold = true;
+
+            for (int i = 1; i < dataGridView1.Columns.Count; i++)
+            {
+                workSheet.Cells[1,i].Value = dataGridView1.Columns[i].HeaderText;
+            }
+           
+            for (int i = 0; i < dataGridView1.Columns.Count; i++)
+            {
+                for (int j = 0; j < dataGridView1.Rows.Count; j++)
+                {
+                }
+            }
+            //// Header of the Excel sheet
+            //workSheet.Cells[1, 1].Value = "S.No";
+            //workSheet.Cells[1, 2].Value = "Id";
+            //workSheet.Cells[1, 3].Value = "Name";
+
+
+            //add image to cell 
+            //ExcelPicture excelImage = null;
+            //    excelImage = workSheet.Drawings.AddPicture("Debopam Pal", "imgExcel.png");
+            //    excelImage.From.Column = 2;
+            //    excelImage.From.Row = 8;
+            //    excelImage.SetSize(100, 100);
+
+            // By default, the column width is not 
+            // set to auto fit for the content
+            // of the range, so we are using
+            // AutoFit() method here. 
+            for (int i = 1; i < dataGridView1.Columns.Count; i++)
+            {
+                workSheet.Column(i).AutoFit();
+            }
+
+            // file name with .xlsx extension 
+            string p_strPath = "@firsSheet.xlsx";
+
+            if (File.Exists(p_strPath))
+                File.Delete(p_strPath);
+
+            // Create excel file on physical disk 
+            FileStream objFileStrm = File.Create(p_strPath);
+            objFileStrm.Close();
+            File.WriteAllBytes(p_strPath, excel.GetAsByteArray());
+            //Close Excel package
+            excel.Dispose();
+
+        }
     }
+    
 }

@@ -54,6 +54,7 @@
             this.length = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.weight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.display = new System.Windows.Forms.DataGridViewImageColumn();
+            this.button2 = new System.Windows.Forms.Button();
             this.RightPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -200,6 +201,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Teal;
+            this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.dateTimePicker1);
             this.panel1.Controls.Add(this.DeleteBtn);
             this.panel1.Controls.Add(this.tailsTB);
@@ -344,6 +346,16 @@
             this.display.Name = "display";
             this.display.ReadOnly = true;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(108, 41);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(94, 29);
+            this.button2.TabIndex = 21;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -391,5 +403,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn length;
         private System.Windows.Forms.DataGridViewTextBoxColumn weight;
         private System.Windows.Forms.DataGridViewImageColumn display;
+        private System.Windows.Forms.Button button2;
     }
 }
