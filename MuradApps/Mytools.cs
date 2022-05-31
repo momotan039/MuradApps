@@ -20,32 +20,32 @@ namespace MuradApps
                 listView1.Focus();
                 return false;
             }
-            if (comboBox1.SelectedItem == null)
+            if (comboBox1.SelectedItem == null || !int.TryParse(comboBox1.SelectedItem.ToString(),out  int d))
             {
                 MessageBox.Show("נא לבחור את הקוטר");
                 comboBox1.Focus();
                 return false;
             }
-            if (numsTB.Text == "")
+            if (!double.TryParse(numsTB.Text,out double a))
             {
                 MessageBox.Show("נא לכניס מספר המוטות");
                 numsTB.Focus();
                 return false;
             }
-            if (widthTB.Text == "")
+            if (!double.TryParse(widthTB.Text, out double b))
             {
                 MessageBox.Show("נא לכניס את הרוחב");
                 widthTB.Focus();
                 return false;
             }
-            if (heightTB.Enabled == true && heightTB.Text == "")
+            if (heightTB.Enabled == true && (!double.TryParse(heightTB.Text, out double c)))
             {
                 MessageBox.Show("נא לכניס את הגובה");
                 heightTB.Focus();
                 return false;
             }
 
-            if (tailsTB.Enabled == true && tailsTB.Text == "")
+            if (tailsTB.Enabled == true && (!double.TryParse(numsTB.Text, out double f)))
             {
                 MessageBox.Show("נא לכניס רוחב חיצוני");
                 tailsTB.Focus();
@@ -53,27 +53,30 @@ namespace MuradApps
             }
             return true;
         }
-        public static void FillGridView(DataGridView dataGridView1,DateTimePicker dateTime)
+        public static void FillGridView(DataGridView dataGridView1,DateTimePicker dateTime,Label weightLabel)
         {
             dataGridView1.Rows.Clear();
             var orders = DbContextHelper.Controller.Orders.ToList().Where(o=>o.date.Month==dateTime.Value.Month);
             int i = 1;
+            double totalWieght = 0;
             foreach (var order in orders)
             {
                 var item = DbContextHelper.Controller.Items.FirstOrDefault(i => i.id == order.idItem);
                 shape = GetShapeByItem(item);
+                double wieght = CalculateWieght(shape.TotalLengthCm() / 100, order);
                 dataGridView1.Rows.Add(
                  item.id, order.date.ToShortDateString(), i++,
                  order.nums,
                  order.qutur,
-                 shape.TotalLengthCm() / 100,
-                 CalculateWidth(shape.TotalLengthCm() / 100, order),
+                 shape.TotalLengthCm() / 100, wieght
+                 ,
                  shape.CustomizeImage()
                 );
+                totalWieght += wieght;
             }
-
+            weightLabel.Text=+totalWieght+":(kg)סכה\"ל משקל ב" ;
         }
-        public static double CalculateWidth(double totalM, Order order)
+        public static double CalculateWieght(double totalM, Order order)
         {
             double weight = 0;
             if (shape is CircularDoubleLine)
@@ -82,7 +85,6 @@ namespace MuradApps
                 weight = order.nums * 0.00616 * totalM * Math.Pow(order.qutur, 2);
             return Math.Round(weight, 2);
         }
-
         public  static  Shape GetShapeByItem(ItemSql item)
         {
             if (item == null)
@@ -135,7 +137,7 @@ namespace MuradApps
             listView1.Items.Add("RectangleMissOne", 6);
             listView1.Items.Add("RectangleMissOneWithTails", 7);
         }
-       public static  Shape CheckedWhichShapeInit(TextBox widthTB, TextBox tailsTB, TextBox heightTB)
+        public static  Shape CheckedWhichShapeInit(TextBox widthTB, TextBox tailsTB, TextBox heightTB)
         {
             Shape shape = null;
             double width = 0, height = 0, tails = 0;
@@ -163,6 +165,5 @@ namespace MuradApps
 
             return shape;
         }
-
     }
 }

@@ -26,14 +26,13 @@ namespace MuradApps
             base.OnLoad(e);
             var quturs = new object[] { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 25 };
             comboBox1.Items.AddRange(quturs);
-
             Mytools.InitListViewShapes(listView1);
-            Mytools.FillGridView(dataGridView1,dateTimePicker1);
+            Mytools.FillGridView(dataGridView1,dateTimePicker1,weightLabel);
         }
       
         private void AddBtn_Click(object sender, EventArgs e)
         {
-            //check if not empty inputs 
+            //check if not empty inputs zzz
             if (!Mytools.ValidationInputs(listView1,comboBox1,numsTB,widthTB,heightTB,tailsTB))
                 return;
             //get shape by selected image
@@ -67,7 +66,7 @@ namespace MuradApps
                 qutur=int.Parse(comboBox1.SelectedItem + "")
             });
             DbContextHelper.Controller.SaveChanges();
-            Mytools.FillGridView(dataGridView1, dateTimePicker1);
+            Mytools.FillGridView(dataGridView1, dateTimePicker1, weightLabel);
         }
 
         
@@ -143,13 +142,13 @@ namespace MuradApps
                     }
                 }
                 MessageBox.Show("הפעולה פוצעה בהצלחה");
-                Mytools.FillGridView(dataGridView1, dateTimePicker1);
+                Mytools.FillGridView(dataGridView1, dateTimePicker1, weightLabel);
             }
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-           Mytools.FillGridView(dataGridView1,dateTimePicker1);
+           Mytools.FillGridView(dataGridView1,dateTimePicker1, weightLabel);
             dateTimePicker1.Visible = false;
             dateTimePicker1.Visible = true;
         }
