@@ -21,13 +21,13 @@ namespace MuradApps
         public override Image CustomizeImage()
         {
             Graphics g = Graphics.FromImage(img);
-            Font f = new Font("tahoma", 70, FontStyle.Bold);
+            Font f = new Font("tahoma", 90, FontStyle.Bold);
             Brush b = Brushes.Red;
-            g.DrawString(width + "", f, b, new PointF(500, 20));
-            g.DrawString(height + "", f, b, new PointF(300, 200));
+            g.DrawString(width + "", f, b, new PointF(550, 100));
+            g.DrawString(height + "", f, b, new PointF(0, 200));
             g.DrawString(height + "", f, b, new PointF(850, 200));
-            g.DrawString(tails + "", f, b, new PointF(100, 400));
-            g.DrawString(tails + "", f, b, new PointF(1000, 400));
+            g.DrawString(tails + "", f, b, new PointF(100, 650));
+            g.DrawString(tails + "", f, b, new PointF(900, 650));
             g.Dispose();
             return img;
         }
