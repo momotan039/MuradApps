@@ -74,7 +74,7 @@ namespace MuradApps
                 );
                 totalWieght += wieght;
             }
-            weightLabel.Text=+totalWieght+":(kg)סכה\"ל משקל ב" ;
+            weightLabel.Text=+Math.Round(totalWieght,2) +":(kg)סכה\"ל משקל ב" ;
         }
         public static double CalculateWieght(double totalM, Order order)
         {

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using OfficeOpenXml.Drawing;
+using OfficeOpenXml.Style;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,7 +11,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace MuradApps
 {
     public partial class Form1 : Form
@@ -96,7 +98,6 @@ namespace MuradApps
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -152,5 +153,123 @@ namespace MuradApps
             dateTimePicker1.Visible = false;
             dateTimePicker1.Visible = true;
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+
+            var sfd = new SaveFileDialog();
+            sfd.Title = "תבחר תיקיה לשמור הדוח";
+            sfd.Filter = "Excel File |*.xlsx";
+            sfd.ShowDialog();
+            if (sfd.FileName == "")
+                return;
+            
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            ExcelPackage excel = new ExcelPackage();
+            // name of the sheet
+            var workSheet = excel.Workbook.Worksheets.Add("Sheet1");
+            // Setting the properties
+            workSheet.Row(1).Height = 30;
+            workSheet.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Row(1).Style.Font.Bold = true;
+            workSheet.Row(1).Style.Font.Size = 25;
+            workSheet.Row(1).Style.VerticalAlignment= ExcelVerticalAlignment.Center;
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                workSheet.Row(i+2).Height = 100;
+                workSheet.Row(i+2).Style.Font.Size = 20;
+                workSheet.Row(i+2).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                workSheet.Row(i + 2).Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+            }
+            //add header text
+            for (int i = 1; i < dataGridView1.Columns.Count; i++)
+            {
+                workSheet.Cells[1,i].Value = dataGridView1.Columns[i].HeaderText;
+            }
+            //create New Folder to save temp pictures
+            Directory.CreateDirectory("tempFolder");
+            // add rows text
+            for (int r = 0; r < dataGridView1.Rows.Count; r++)
+            {
+                for (int c = 0; c < dataGridView1.Columns.Count-1; c++)
+                {
+                    object val = dataGridView1.Rows[r].Cells[c + 1].Value;
+                    if(val is Image)
+                    {
+                        //save image to current  folder
+                        var img = dataGridView1.Rows[r].Cells[c+1].Value as Bitmap;
+                        string path = "tempFolder/imgExcel"+r+".png";
+                        try
+                        {
+                            img.Save(path);
+                        }
+                        catch (Exception)
+                        {
+
+                            //MessageBox.Show("התרחשה בעית בעת ביצוע נא לנסות שוה");
+                            return;
+
+                        }
+
+                        var pic = workSheet.Drawings.AddPicture(r + 1 + "", path);
+                        //customize image
+                        pic.From.Column = c;
+                        pic.From.Row = r+1;
+                        pic.SetSize(162,135);
+
+                       
+                    }
+                    else
+                    {
+                        workSheet.Cells[r + 2, c + 1].Value = val;
+                    }
+                }
+            }
+            //add weight to end last row in file excel
+            int lastRow = dataGridView1.RowCount + 2;
+
+            workSheet.Cells[lastRow,1,lastRow,10].Merge=true;
+            workSheet.Row(lastRow).Style.Font.Bold=true;
+            workSheet.Row(lastRow).Style.Font.Size=28;
+            workSheet.Row(lastRow).Style.HorizontalAlignment= ExcelHorizontalAlignment.Center;
+            workSheet.Cells[lastRow, 1].Value = weightLabel.Text;
+
+            // set to auto fit for the content
+            // of the range, so we are using
+            // AutoFit() method here. 
+            for (int i = 1; i < dataGridView1.Columns.Count; i++)
+            {
+                workSheet.Column(i).AutoFit();
+            }
+
+            // file name with .xlsx extension 
+            
+
+            if (File.Exists(sfd.FileName))
+                File.Delete(sfd.FileName);
+
+            // Create excel file on physical disk 
+            FileStream objFileStrm = File.Create(sfd.FileName);
+            objFileStrm.Close();
+            File.WriteAllBytes(sfd.FileName, excel.GetAsByteArray());
+
+            try
+            {
+                Directory.Delete("tempFolder", true);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("הקובץ נשמר בהצלחה");
+
+                return;
+            }
+            MessageBox.Show("הקובץ נשמר בהצלחה");
+        }
     }
+    
 }
