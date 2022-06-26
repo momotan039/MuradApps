@@ -270,6 +270,12 @@ namespace MuradApps
             }
             MessageBox.Show("הקובץ נשמר בהצלחה");
         }
+
+        private void dateTimePicker1_Leave(object sender, EventArgs e)
+        {
+            MessageBox.Show("datePicker Leaved!!");
+
+        }
     }
     
 }

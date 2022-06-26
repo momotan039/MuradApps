@@ -56,7 +56,8 @@ namespace MuradApps
         public static void FillGridView(DataGridView dataGridView1,DateTimePicker dateTime,Label weightLabel)
         {
             dataGridView1.Rows.Clear();
-            var orders = DbContextHelper.Controller.Orders.ToList().Where(o=>o.date.Month==dateTime.Value.Month);
+            
+            var orders = DbContextHelper.Controller.Orders.ToList().Where(o=>o.date.ToShortDateString() == dateTime.Value.ToShortDateString());
             int i = 1;
             double totalWieght = 0;
             foreach (var order in orders)
@@ -74,6 +75,7 @@ namespace MuradApps
                 );
                 totalWieght += wieght;
             }
+
             weightLabel.Text=+Math.Round(totalWieght,2) +":(kg)סכה\"ל משקל ב" ;
         }
         public static double CalculateWieght(double totalM, Order order)
