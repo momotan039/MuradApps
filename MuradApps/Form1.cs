@@ -16,7 +16,6 @@ namespace MuradApps
     public partial class Form1 : Form
     {
 
-        //200 15 500 10  662k
         List<Item> items=new List<Item> ();
         public Form1()
         {
@@ -29,7 +28,13 @@ namespace MuradApps
             var quturs = new object[] { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 25 };
             comboBox1.Items.AddRange(quturs);
             Mytools.InitListViewShapes(listView1);
-            Mytools.FillGridView(dataGridView1,dateTimePicker1,weightLabel);
+            Mytools.FillGridView(dataGridView1,dateTimePicker1,weightLabel,checkBoxMonths);
+            leftPanel.AutoScroll = false;
+            leftPanel.HorizontalScroll.Enabled = false;
+            leftPanel.HorizontalScroll.Visible = false;
+            leftPanel.HorizontalScroll.Maximum = 0;
+            leftPanel.AutoScroll = true;
+            Mytools.ChangeBackgroundSelectedShape(listView1);
         }
       
         private void AddBtn_Click(object sender, EventArgs e)
@@ -53,7 +58,7 @@ namespace MuradApps
             width = Mytools.shape.width,
             tails=tails,
             height=height,
-            nameShape =Mytools.lastShapeSelected,
+            nameShape =Mytools.lastShapeNameSelected,
             };
             //add item to database
             DbContextHelper.Controller.Items.Add(item);
@@ -68,7 +73,7 @@ namespace MuradApps
                 qutur=int.Parse(comboBox1.SelectedItem + "")
             });
             DbContextHelper.Controller.SaveChanges();
-            Mytools.FillGridView(dataGridView1, dateTimePicker1, weightLabel);
+            Mytools.FillGridView(dataGridView1, dateTimePicker1, weightLabel,checkBoxMonths);
         }
 
         
@@ -84,17 +89,19 @@ namespace MuradApps
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
         {
-            Mytools.lastShapeSelected = listView1.SelectedItems[0].SubItems[0].Text;
-
-            if (Mytools.lastShapeSelected == "RectangleMissOneWithTails" || Mytools.lastShapeSelected == "CurvedRectangleMissOneWithTails")
+            Mytools.lastShapeNameSelected = listView1.SelectedItems[0].SubItems[0].Text;
+            Mytools.ChangeBackgroundSelectedShape(listView1);
+            if (Mytools.lastShapeNameSelected == "RectangleMissOneWithTails" || Mytools.lastShapeNameSelected == "CurvedRectangleMissOneWithTails")
                 tailsTB.Enabled = true;
             else
                 tailsTB.Enabled = false;
-            if (Mytools.lastShapeSelected != "Line")
+            if (Mytools.lastShapeNameSelected != "Line")
                 heightTB.Enabled = true;
             else
                 heightTB.Enabled = false;
         }
+
+        
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -143,20 +150,20 @@ namespace MuradApps
                     }
                 }
                 MessageBox.Show("הפעולה פוצעה בהצלחה");
-                Mytools.FillGridView(dataGridView1, dateTimePicker1, weightLabel);
+                Mytools.FillGridView(dataGridView1, dateTimePicker1, weightLabel,checkBoxMonths);
             }
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-           Mytools.FillGridView(dataGridView1,dateTimePicker1, weightLabel);
-            dateTimePicker1.Visible = false;
-            dateTimePicker1.Visible = true;
+           Mytools.FillGridView(dataGridView1,dateTimePicker1, weightLabel,checkBoxMonths);
+            //dateTimePicker1.Visible = false;
+            //dateTimePicker1.Visible = true;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-
+            
         }
 
         private void button2_Click_1(object sender, EventArgs e)
@@ -271,10 +278,20 @@ namespace MuradApps
             MessageBox.Show("הקובץ נשמר בהצלחה");
         }
 
-        private void dateTimePicker1_Leave(object sender, EventArgs e)
-        {
-            MessageBox.Show("datePicker Leaved!!");
+      
 
+        private void dateTimePicker1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar ==((char)Keys.Enter))
+            {
+                dataGridView1.Focus();
+            }
+        }
+
+
+        private void checkBoxMonths_CheckedChanged(object sender, EventArgs e)
+        {
+            Mytools.FillGridView(dataGridView1, dateTimePicker1, weightLabel, checkBoxMonths);
         }
     }
     
