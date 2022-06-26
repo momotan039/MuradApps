@@ -141,4 +141,4 @@ C:\Users\momotan\source\repos\MuradApps\MuradApps\bin\Debug\netcoreapp3.1\System
 C:\Users\momotan\source\repos\MuradApps\MuradApps\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\momotan\source\repos\MuradApps\MuradApps\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\momotan\source\repos\MuradApps\MuradApps\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
-C:\Users\MOHAMMED\source\repos\MuradApps\MuradApps\obj\Debug\netcoreapp3.1\MuradApps.MuradApp.resources
+C:\Users\MOHAMMED\source\repos\MuradApps\MuradApps\obj\Debug\netcoreapp3.1\MuradApps.Form1.resources

@@ -16,7 +16,6 @@ namespace MuradApps
     public partial class Form1 : Form
     {
 
-        //200 15 500 10  662k
         List<Item> items=new List<Item> ();
         public Form1()
         {
