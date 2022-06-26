@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.numsTB = new System.Windows.Forms.TextBox();
             this.AddBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -42,7 +42,8 @@
             this.heightTB = new System.Windows.Forms.TextBox();
             this.tailsTB = new System.Windows.Forms.TextBox();
             this.RightPanel = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.leftPanel = new System.Windows.Forms.Panel();
+            this.checkBoxMonths = new System.Windows.Forms.CheckBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.DeleteBtn = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -58,7 +59,7 @@
             this.weight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.display = new System.Windows.Forms.DataGridViewImageColumn();
             this.RightPanel.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.leftPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -68,9 +69,9 @@
             this.numsTB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.numsTB.Font = new System.Drawing.Font("Showcard Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.numsTB.ForeColor = System.Drawing.Color.White;
-            this.numsTB.Location = new System.Drawing.Point(38, 480);
+            this.numsTB.Location = new System.Drawing.Point(31, 506);
             this.numsTB.Name = "numsTB";
-            this.numsTB.Size = new System.Drawing.Size(134, 40);
+            this.numsTB.Size = new System.Drawing.Size(201, 40);
             this.numsTB.TabIndex = 1;
             // 
             // AddBtn
@@ -78,9 +79,9 @@
             this.AddBtn.BackColor = System.Drawing.Color.DarkBlue;
             this.AddBtn.Font = new System.Drawing.Font("Segoe UI Historic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.AddBtn.ForeColor = System.Drawing.Color.AliceBlue;
-            this.AddBtn.Location = new System.Drawing.Point(18, 648);
+            this.AddBtn.Location = new System.Drawing.Point(18, 674);
             this.AddBtn.Name = "AddBtn";
-            this.AddBtn.Size = new System.Drawing.Size(184, 67);
+            this.AddBtn.Size = new System.Drawing.Size(217, 67);
             this.AddBtn.TabIndex = 2;
             this.AddBtn.Text = "שמירה";
             this.AddBtn.UseVisualStyleBackColor = false;
@@ -90,7 +91,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Showcard Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(40, 421);
+            this.label1.Location = new System.Drawing.Point(74, 447);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(139, 30);
             this.label1.TabIndex = 3;
@@ -100,7 +101,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Showcard Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(75, 539);
+            this.label2.Location = new System.Drawing.Point(111, 565);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 30);
             this.label2.TabIndex = 4;
@@ -112,9 +113,9 @@
             this.comboBox1.Font = new System.Drawing.Font("Showcard Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.comboBox1.ForeColor = System.Drawing.Color.White;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(38, 591);
+            this.comboBox1.Location = new System.Drawing.Point(31, 617);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(134, 41);
+            this.comboBox1.Size = new System.Drawing.Size(201, 41);
             this.comboBox1.TabIndex = 6;
             // 
             // listView1
@@ -134,7 +135,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Showcard Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(34, 69);
+            this.label3.Location = new System.Drawing.Point(71, 95);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(145, 30);
             this.label3.TabIndex = 13;
@@ -144,7 +145,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Showcard Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(18, 304);
+            this.label5.Location = new System.Drawing.Point(48, 330);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(191, 30);
             this.label5.TabIndex = 14;
@@ -154,7 +155,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Showcard Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(47, 188);
+            this.label6.Location = new System.Drawing.Point(81, 214);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(124, 30);
             this.label6.TabIndex = 13;
@@ -165,9 +166,9 @@
             this.widthTB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.widthTB.Font = new System.Drawing.Font("Showcard Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.widthTB.ForeColor = System.Drawing.Color.White;
-            this.widthTB.Location = new System.Drawing.Point(38, 119);
+            this.widthTB.Location = new System.Drawing.Point(31, 145);
             this.widthTB.Name = "widthTB";
-            this.widthTB.Size = new System.Drawing.Size(134, 40);
+            this.widthTB.Size = new System.Drawing.Size(201, 40);
             this.widthTB.TabIndex = 15;
             // 
             // heightTB
@@ -175,9 +176,9 @@
             this.heightTB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.heightTB.Font = new System.Drawing.Font("Showcard Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.heightTB.ForeColor = System.Drawing.Color.White;
-            this.heightTB.Location = new System.Drawing.Point(38, 240);
+            this.heightTB.Location = new System.Drawing.Point(31, 266);
             this.heightTB.Name = "heightTB";
-            this.heightTB.Size = new System.Drawing.Size(134, 40);
+            this.heightTB.Size = new System.Drawing.Size(201, 40);
             this.heightTB.TabIndex = 16;
             // 
             // tailsTB
@@ -186,45 +187,61 @@
             this.tailsTB.Enabled = false;
             this.tailsTB.Font = new System.Drawing.Font("Showcard Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.tailsTB.ForeColor = System.Drawing.Color.White;
-            this.tailsTB.Location = new System.Drawing.Point(38, 356);
+            this.tailsTB.Location = new System.Drawing.Point(31, 382);
             this.tailsTB.Name = "tailsTB";
-            this.tailsTB.Size = new System.Drawing.Size(134, 40);
+            this.tailsTB.Size = new System.Drawing.Size(201, 40);
             this.tailsTB.TabIndex = 17;
             // 
             // RightPanel
             // 
-            this.RightPanel.Controls.Add(this.panel1);
+            this.RightPanel.Controls.Add(this.leftPanel);
             this.RightPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.RightPanel.ForeColor = System.Drawing.SystemColors.Control;
             this.RightPanel.Location = new System.Drawing.Point(0, 163);
             this.RightPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.RightPanel.Name = "RightPanel";
-            this.RightPanel.Size = new System.Drawing.Size(229, 892);
+            this.RightPanel.Size = new System.Drawing.Size(281, 892);
             this.RightPanel.TabIndex = 18;
             // 
-            // panel1
+            // leftPanel
             // 
-            this.panel1.BackColor = System.Drawing.Color.Teal;
-            this.panel1.Controls.Add(this.dateTimePicker1);
-            this.panel1.Controls.Add(this.DeleteBtn);
-            this.panel1.Controls.Add(this.tailsTB);
-            this.panel1.Controls.Add(this.widthTB);
-            this.panel1.Controls.Add(this.AddBtn);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.heightTB);
-            this.panel1.Controls.Add(this.numsTB);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.ForeColor = System.Drawing.Color.Black;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(229, 892);
-            this.panel1.TabIndex = 13;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.leftPanel.BackColor = System.Drawing.Color.Teal;
+            this.leftPanel.Controls.Add(this.checkBoxMonths);
+            this.leftPanel.Controls.Add(this.dateTimePicker1);
+            this.leftPanel.Controls.Add(this.DeleteBtn);
+            this.leftPanel.Controls.Add(this.tailsTB);
+            this.leftPanel.Controls.Add(this.widthTB);
+            this.leftPanel.Controls.Add(this.AddBtn);
+            this.leftPanel.Controls.Add(this.label3);
+            this.leftPanel.Controls.Add(this.label2);
+            this.leftPanel.Controls.Add(this.label6);
+            this.leftPanel.Controls.Add(this.comboBox1);
+            this.leftPanel.Controls.Add(this.label1);
+            this.leftPanel.Controls.Add(this.heightTB);
+            this.leftPanel.Controls.Add(this.numsTB);
+            this.leftPanel.Controls.Add(this.label5);
+            this.leftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.leftPanel.ForeColor = System.Drawing.Color.Black;
+            this.leftPanel.Location = new System.Drawing.Point(0, 0);
+            this.leftPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.leftPanel.MinimumSize = new System.Drawing.Size(280, 0);
+            this.leftPanel.Name = "leftPanel";
+            this.leftPanel.Size = new System.Drawing.Size(281, 892);
+            this.leftPanel.TabIndex = 13;
+            this.leftPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // checkBoxMonths
+            // 
+            this.checkBoxMonths.AutoSize = true;
+            this.checkBoxMonths.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.checkBoxMonths.ForeColor = System.Drawing.Color.Black;
+            this.checkBoxMonths.Location = new System.Drawing.Point(51, 41);
+            this.checkBoxMonths.Name = "checkBoxMonths";
+            this.checkBoxMonths.Size = new System.Drawing.Size(162, 32);
+            this.checkBoxMonths.TabIndex = 21;
+            this.checkBoxMonths.Text = "הצג לפי חודש";
+            this.checkBoxMonths.UseVisualStyleBackColor = true;
+            this.checkBoxMonths.CheckedChanged += new System.EventHandler(this.checkBoxMonths_CheckedChanged);
             // 
             // dateTimePicker1
             // 
@@ -234,17 +251,18 @@
             this.dateTimePicker1.Location = new System.Drawing.Point(5, 7);
             this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(221, 27);
+            this.dateTimePicker1.Size = new System.Drawing.Size(247, 27);
             this.dateTimePicker1.TabIndex = 20;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.dateTimePicker1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dateTimePicker1_KeyPress);
             // 
             // DeleteBtn
             // 
             this.DeleteBtn.BackColor = System.Drawing.Color.Red;
             this.DeleteBtn.Font = new System.Drawing.Font("Segoe UI Historic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.DeleteBtn.Location = new System.Drawing.Point(18, 743);
+            this.DeleteBtn.Location = new System.Drawing.Point(18, 769);
             this.DeleteBtn.Name = "DeleteBtn";
-            this.DeleteBtn.Size = new System.Drawing.Size(184, 67);
+            this.DeleteBtn.Size = new System.Drawing.Size(217, 67);
             this.DeleteBtn.TabIndex = 19;
             this.DeleteBtn.Text = "מחיקה";
             this.DeleteBtn.UseVisualStyleBackColor = false;
@@ -257,9 +275,9 @@
             this.button2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.button2.Font = new System.Drawing.Font("Showcard Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button2.Location = new System.Drawing.Point(229, 883);
+            this.button2.Location = new System.Drawing.Point(281, 883);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(1006, 72);
+            this.button2.Size = new System.Drawing.Size(954, 72);
             this.button2.TabIndex = 21;
             this.button2.Text = "EXCEL שמור כקובץ ";
             this.button2.UseVisualStyleBackColor = false;
@@ -271,9 +289,9 @@
             this.panel2.Controls.Add(this.weightLabel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.ForeColor = System.Drawing.Color.White;
-            this.panel2.Location = new System.Drawing.Point(229, 955);
+            this.panel2.Location = new System.Drawing.Point(281, 955);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1006, 100);
+            this.panel2.Size = new System.Drawing.Size(954, 100);
             this.panel2.TabIndex = 19;
             // 
             // weightLabel
@@ -283,7 +301,7 @@
             this.weightLabel.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.weightLabel.Location = new System.Drawing.Point(0, 0);
             this.weightLabel.Name = "weightLabel";
-            this.weightLabel.Size = new System.Drawing.Size(1006, 100);
+            this.weightLabel.Size = new System.Drawing.Size(954, 100);
             this.weightLabel.TabIndex = 0;
             this.weightLabel.Text = "1000:(kg)סכה\"ל משקל ב ";
             this.weightLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -294,14 +312,14 @@
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
@@ -314,7 +332,7 @@
             this.display});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ControlLight;
-            this.dataGridView1.Location = new System.Drawing.Point(229, 163);
+            this.dataGridView1.Location = new System.Drawing.Point(281, 163);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
@@ -324,7 +342,7 @@
             this.dataGridView1.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Red;
             this.dataGridView1.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Yellow;
             this.dataGridView1.RowTemplate.Height = 100;
-            this.dataGridView1.Size = new System.Drawing.Size(1006, 792);
+            this.dataGridView1.Size = new System.Drawing.Size(954, 792);
             this.dataGridView1.TabIndex = 19;
             // 
             // Id
@@ -400,8 +418,8 @@
             this.Text = "Murad\'s App ";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.RightPanel.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.leftPanel.ResumeLayout(false);
+            this.leftPanel.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -423,7 +441,7 @@
         private System.Windows.Forms.TextBox heightTB;
         private System.Windows.Forms.TextBox tailsTB;
         private System.Windows.Forms.Panel RightPanel;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel leftPanel;
         private System.Windows.Forms.Button AddBtn;
         private System.Windows.Forms.Button DeleteBtn;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
@@ -439,5 +457,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn weight;
         private System.Windows.Forms.DataGridViewImageColumn display;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.CheckBox checkBoxMonths;
     }
 }

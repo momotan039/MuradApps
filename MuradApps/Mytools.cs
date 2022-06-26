@@ -11,10 +11,10 @@ namespace MuradApps
     internal static  class Mytools
     {
         public static Shape shape = null;
-        public static string lastShapeSelected;
+        public static string lastShapeNameSelected;
         public static bool ValidationInputs(ListView listView1, ComboBox comboBox1, TextBox numsTB, TextBox widthTB, TextBox heightTB, TextBox tailsTB)
         {
-            if (lastShapeSelected == null)
+            if (lastShapeNameSelected == null)
             {
                 MessageBox.Show("נא לבחור את הצורה !! ");
                 listView1.Focus();
@@ -45,7 +45,7 @@ namespace MuradApps
                 return false;
             }
 
-            if (tailsTB.Enabled == true && (!double.TryParse(numsTB.Text, out double f)))
+            if (tailsTB.Enabled == true && (!double.TryParse(tailsTB.Text, out double f)))
             {
                 MessageBox.Show("נא לכניס רוחב חיצוני");
                 tailsTB.Focus();
@@ -53,11 +53,19 @@ namespace MuradApps
             }
             return true;
         }
-        public static void FillGridView(DataGridView dataGridView1,DateTimePicker dateTime,Label weightLabel)
+        public static void FillGridView(DataGridView dataGridView1,DateTimePicker dateTime,Label weightLabel,CheckBox monthChecker)
         {
             dataGridView1.Rows.Clear();
-            var orders = DbContextHelper.Controller.Orders.ToList().Where(o=>o.date.Month==dateTime.Value.Month);
-            int i = 1;
+            IEnumerable<Order> orders;
+
+            //get orders by selected month
+            if(monthChecker.Checked)
+             orders = DbContextHelper.Controller.Orders.ToList().Where(o=>o.date.Month == dateTime.Value.Month);
+           //get orders by selected full date
+            else
+                orders = DbContextHelper.Controller.Orders.ToList().Where(o => o.date.ToShortDateString() == dateTime.Value.ToShortDateString());
+           
+            int rows = 1;
             double totalWieght = 0;
             foreach (var order in orders)
             {
@@ -65,15 +73,18 @@ namespace MuradApps
                 shape = GetShapeByItem(item);
                 double wieght = CalculateWieght(shape.TotalLengthCm() / 100, order);
                 dataGridView1.Rows.Add(
-                 item.id, order.date.ToShortDateString(), i++,
+                 item.id,
+                 order.date.ToShortDateString(),
+                 rows++,
                  order.nums,
                  order.qutur,
-                 shape.TotalLengthCm() / 100, wieght
-                 ,
+                 shape.TotalLengthCm() / 100,
+                 wieght,
                  shape.CustomizeImage()
                 );
                 totalWieght += wieght;
             }
+
             weightLabel.Text=+Math.Round(totalWieght,2) +":(kg)סכה\"ל משקל ב" ;
         }
         public static double CalculateWieght(double totalM, Order order)
@@ -96,22 +107,22 @@ namespace MuradApps
             if (item.height != 0)
                 height = item.height;
             width = item.width;
-            lastShapeSelected = item.nameShape;
-            if (lastShapeSelected == "Line")
+            lastShapeNameSelected = item.nameShape;
+            if (lastShapeNameSelected == "Line")
                 shape = new Line(width);
-            else if (lastShapeSelected == "LightingStrike")
+            else if (lastShapeNameSelected == "LightingStrike")
                 shape = new LightingStrike(width, height);
-            else if (lastShapeSelected == "DoubleLine")
+            else if (lastShapeNameSelected == "DoubleLine")
                 shape = new DoubleLine(width, height);
-            else if (lastShapeSelected == "CircularDoubleLine")
+            else if (lastShapeNameSelected == "CircularDoubleLine")
                 shape = new CircularDoubleLine(width, height);
-            else if (lastShapeSelected == "Rectangle")
+            else if (lastShapeNameSelected == "Rectangle")
                 shape = new Rectangle(width, height);
-            else if (lastShapeSelected == "RectangleMissOne")
+            else if (lastShapeNameSelected == "RectangleMissOne")
                 shape = new RectangleMissOne(width, height);
-            else if (lastShapeSelected == "RectangleMissOneWithTails")
+            else if (lastShapeNameSelected == "RectangleMissOneWithTails")
                 shape = new RectangleMissOneWithTails(width, height, tails);
-            else if (lastShapeSelected == "CurvedRectangleMissOneWithTails")
+            else if (lastShapeNameSelected == "CurvedRectangleMissOneWithTails")
                 shape = new CurvedRectangleMissOneWithTails(width, height, tails);
 
             return shape;
@@ -136,34 +147,48 @@ namespace MuradApps
             listView1.Items.Add("Rectangle", 5);
             listView1.Items.Add("RectangleMissOne", 6);
             listView1.Items.Add("RectangleMissOneWithTails", 7);
+            
         }
         public static  Shape CheckedWhichShapeInit(TextBox widthTB, TextBox tailsTB, TextBox heightTB)
         {
-            Shape shape = null;
             double width = 0, height = 0, tails = 0;
             width = double.Parse(widthTB.Text);
             if (tailsTB.Text != "")
                 tails = double.Parse(tailsTB.Text);
             if (heightTB.Text != "")
                 height = double.Parse(heightTB.Text);
-            if (lastShapeSelected == "Line")
-                shape = new Line(width);
-            else if (lastShapeSelected == "LightingStrike")
-                shape = new LightingStrike(width, height);
-            else if (lastShapeSelected == "DoubleLine")
-                shape = new DoubleLine(width, height);
-            else if (lastShapeSelected == "CircularDoubleLine")
-                shape = new CircularDoubleLine(width, height);
-            else if (lastShapeSelected == "Rectangle")
-                shape = new Rectangle(width, height);
-            else if (lastShapeSelected == "RectangleMissOne")
-                shape = new RectangleMissOne(width, height);
-            else if (lastShapeSelected == "RectangleMissOneWithTails")
-                shape = new RectangleMissOneWithTails(width, height, tails);
-            else if (lastShapeSelected == "CurvedRectangleMissOneWithTails")
-                shape = new CurvedRectangleMissOneWithTails(width, height, tails);
 
-            return shape;
+            if (lastShapeNameSelected == "Line")
+                return new Line(width);
+            else if (lastShapeNameSelected == "LightingStrike")
+                return new LightingStrike(width, height);
+            else if (lastShapeNameSelected == "DoubleLine")
+                return new DoubleLine(width, height);
+            else if (lastShapeNameSelected == "CircularDoubleLine")
+                return new CircularDoubleLine(width, height);
+            else if (lastShapeNameSelected == "Rectangle")
+                return new Rectangle(width, height);
+            else if (lastShapeNameSelected == "RectangleMissOne")
+                return new RectangleMissOne(width, height);
+            else if (lastShapeNameSelected == "RectangleMissOneWithTails")
+                return new RectangleMissOneWithTails(width, height, tails);
+            else
+                return new CurvedRectangleMissOneWithTails(width, height, tails);
+        }
+
+        public static void ChangeBackgroundSelectedShape(ListView listView)
+        {
+            if (lastShapeNameSelected == null)
+                return; 
+            //reset forground color for items
+            foreach (ListViewItem item in listView.Items)
+            {
+                item.ForeColor = Color.White;
+            }
+            //change selected item forground
+            listView.FindItemWithText(lastShapeNameSelected).ForeColor = Color.Red;
+            //remove defult blue color from selected item
+            listView.SelectedItems.Clear();
         }
     }
 }
