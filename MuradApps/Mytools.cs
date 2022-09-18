@@ -8,10 +8,20 @@ using System.Windows.Forms;
 
 namespace MuradApps
 {
-    internal static  class Mytools
+    internal static class Mytools
     {
         public static Shape shape = null;
         public static string lastShapeNameSelected;
+        public static Object[] quturs = new object[] {
+            6, 8,10, 12,
+            14, 16,18, 20,
+            22,25,28,32,
+            50};
+        public static double[] weightQuturByMeter ={
+            0.229,0.407,0.636,0.915,
+            1.25,1.63,2.06,2.54,
+            3.07,3.97,4.97,6.5,
+            15.68};
         public static bool ValidationInputs(ListView listView1, ComboBox comboBox1, TextBox numsTB, TextBox widthTB, TextBox heightTB, TextBox tailsTB)
         {
             if (lastShapeNameSelected == null)
@@ -20,13 +30,13 @@ namespace MuradApps
                 listView1.Focus();
                 return false;
             }
-            if (comboBox1.SelectedItem == null || !int.TryParse(comboBox1.SelectedItem.ToString(),out  int d))
+            if (comboBox1.SelectedItem == null || !int.TryParse(comboBox1.SelectedItem.ToString(), out int d))
             {
                 MessageBox.Show("נא לבחור את הקוטר");
                 comboBox1.Focus();
                 return false;
             }
-            if (!double.TryParse(numsTB.Text,out double a))
+            if (!double.TryParse(numsTB.Text, out double a))
             {
                 MessageBox.Show("נא לכניס מספר המוטות");
                 numsTB.Focus();
@@ -53,18 +63,18 @@ namespace MuradApps
             }
             return true;
         }
-        public static void FillGridView(DataGridView dataGridView1,DateTimePicker dateTime,Label weightLabel,CheckBox monthChecker)
+        public static void FillGridView(DataGridView dataGridView1, DateTimePicker dateTime, Label weightLabel, CheckBox monthChecker)
         {
             dataGridView1.Rows.Clear();
             IEnumerable<Order> orders;
 
             //get orders by selected month
-            if(monthChecker.Checked)
-             orders = DbContextHelper.Controller.Orders.ToList().Where(o=>o.date.Month == dateTime.Value.Month);
-           //get orders by selected full date
+            if (monthChecker.Checked)
+                orders = DbContextHelper.Controller.Orders.ToList().Where(o => o.date.Month == dateTime.Value.Month);
+            //get orders by selected full date
             else
                 orders = DbContextHelper.Controller.Orders.ToList().Where(o => o.date.ToShortDateString() == dateTime.Value.ToShortDateString());
-           
+
             int rows = 1;
             double totalWieght = 0;
             foreach (var order in orders)
@@ -85,7 +95,7 @@ namespace MuradApps
                 totalWieght += wieght;
             }
 
-            weightLabel.Text=+Math.Round(totalWieght,2) +":(kg)סכה\"ל משקל ב" ;
+            weightLabel.Text = +Math.Round(totalWieght, 2) + ":(kg)סכה\"ל משקל ב";
         }
         public static double CalculateWieght(double totalM, Order order)
         {
@@ -93,10 +103,22 @@ namespace MuradApps
             if (shape is CircularDoubleLine)
                 weight = 0.222 * totalM * order.nums;
             else
-                weight = order.nums * 0.00616 * totalM * Math.Pow(order.qutur, 2);
+            {
+                double weightOfQutur = 0;
+                for (int i = 0; i < quturs.Length; i++)
+                {
+                    if (Convert.ToInt16(quturs[i]) == order.qutur)
+                    {
+                        weightOfQutur = weightQuturByMeter[i];
+                        break;
+                    }
+                }
+                //weight = order.nums * 0.00616 * totalM * Math.Pow(order.qutur, 2);
+                weight = order.nums * weightOfQutur * totalM * order.qutur;
+            }
             return Math.Round(weight, 2);
         }
-        public  static  Shape GetShapeByItem(ItemSql item)
+        public static Shape GetShapeByItem(ItemSql item)
         {
             if (item == null)
                 return null;
@@ -147,9 +169,9 @@ namespace MuradApps
             listView1.Items.Add("Rectangle", 5);
             listView1.Items.Add("RectangleMissOne", 6);
             listView1.Items.Add("RectangleMissOneWithTails", 7);
-            
+
         }
-        public static  Shape CheckedWhichShapeInit(TextBox widthTB, TextBox tailsTB, TextBox heightTB)
+        public static Shape CheckedWhichShapeInit(TextBox widthTB, TextBox tailsTB, TextBox heightTB)
         {
             double width = 0, height = 0, tails = 0;
             width = double.Parse(widthTB.Text);
@@ -179,7 +201,7 @@ namespace MuradApps
         public static void ChangeBackgroundSelectedShape(ListView listView)
         {
             if (lastShapeNameSelected == null)
-                return; 
+                return;
             //reset forground color for items
             foreach (ListViewItem item in listView.Items)
             {

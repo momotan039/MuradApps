@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>MuradApps</id>
+    <version>1.0.0</version>
+    <authors>MuradApps</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.1">
+        <dependency id="EPPlus" version="6.0.4" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore" version="5.0.17" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore.Sqlite" version="5.0.17" exclude="Build,Analyzers" />
+        <dependency id="Syncfusion.XlsIO.WinForms" version="20.1.0.58" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework=".NETCoreApp3.1">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WindowsForms" />
+      </group>
+    </frameworkReferences>
+    <contentFiles>
+      <files include="any/netcoreapp3.1/iron-bar2.ico" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="C:\Users\momotan\source\repos\MuradApps\MuradApps\bin\Debug\netcoreapp3.1\MuradApps.runtimeconfig.json" target="lib\netcoreapp3.1\MuradApps.runtimeconfig.json" />
+    <file src="C:\Users\momotan\source\repos\MuradApps\MuradApps\bin\Debug\netcoreapp3.1\MuradApps.dll" target="lib\netcoreapp3.1\MuradApps.dll" />
+    <file src="C:\Users\momotan\source\repos\MuradApps\MuradApps\iron-bar2.ico" target="content\iron-bar2.ico" />
+    <file src="C:\Users\momotan\source\repos\MuradApps\MuradApps\iron-bar2.ico" target="contentFiles\any\netcoreapp3.1\iron-bar2.ico" />
+  </files>
+</package>

@@ -25,8 +25,7 @@ namespace MuradApps
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            var quturs = new object[] { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 25 };
-            comboBox1.Items.AddRange(quturs);
+            comboBox1.Items.AddRange(Mytools.quturs);
             Mytools.InitListViewShapes(listView1);
             Mytools.FillGridView(dataGridView1,dateTimePicker1,weightLabel,checkBoxMonths);
             leftPanel.AutoScroll = false;
