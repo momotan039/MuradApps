@@ -114,7 +114,7 @@ namespace MuradApps
                     }
                 }
                 //weight = order.nums * 0.00616 * totalM * Math.Pow(order.qutur, 2);
-                weight = order.nums * weightOfQutur * totalM * order.qutur;
+                weight = order.nums * weightOfQutur * totalM ;
             }
             return Math.Round(weight, 2);
         }
