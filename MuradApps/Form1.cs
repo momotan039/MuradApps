@@ -1,4 +1,6 @@
-﻿using OfficeOpenXml;
+﻿using MuradApps.Forms;
+using MuradApps.Shapes_Opjects;
+using OfficeOpenXml;
 using OfficeOpenXml.Drawing;
 using OfficeOpenXml.Style;
 using System;
@@ -16,7 +18,6 @@ namespace MuradApps
     public partial class Form1 : Form
     {
 
-        List<Item> items=new List<Item> ();
         public Form1()
         {
             InitializeComponent();
@@ -38,26 +39,30 @@ namespace MuradApps
       
         private void AddBtn_Click(object sender, EventArgs e)
         {
-            //check if not empty inputs zzz
+            //check if not empty inputs 
             if (!Mytools.ValidationInputs(listView1,comboBox1,numsTB,widthTB,heightTB,tailsTB))
                 return;
+
             //get shape by selected image
             Mytools.shape = Mytools.CheckedWhichShapeInit(widthTB,tailsTB,heightTB);
 
             double totalM = Mytools.shape.TotalLengthCm() / 100;
-            double tails=0, height=0;
+            double tails=0, height=0,quturSpinner=0,radiusSpinner=0, widthSpinner = 0;
+
             if (Mytools.shape is RectangleMissOneWithTails)
                 tails= (Mytools.shape as RectangleMissOneWithTails).tails;
             if (Mytools.shape is DoubleLine)
                 height = (Mytools.shape as DoubleLine).height;
             else if (Mytools.shape is LightingStrike)
                 height = (Mytools.shape as LightingStrike).curvedHeight;
-
+            
             var item = new ItemSql { 
             width = Mytools.shape.width,
             tails=tails,
             height=height,
             nameShape =Mytools.lastShapeNameSelected,
+            quturSpinner=Mytools.shape is SpinnerLines? (Mytools.shape as SpinnerLines).qutur:0,
+            radiusSpinner = Mytools.shape is SpinnerLines ? (Mytools.shape as SpinnerLines).radius : 0,
             };
             //add item to database
             DbContextHelper.Controller.Items.Add(item);
@@ -74,10 +79,6 @@ namespace MuradApps
             DbContextHelper.Controller.SaveChanges();
             Mytools.FillGridView(dataGridView1, dateTimePicker1, weightLabel,checkBoxMonths);
         }
-
-        
-
-        
         
         private void button2_Click(object sender, EventArgs e)
         {
@@ -89,7 +90,6 @@ namespace MuradApps
         private void listView1_MouseClick(object sender, MouseEventArgs e)
         {
             Mytools.lastShapeNameSelected = listView1.SelectedItems[0].SubItems[0].Text;
-            Mytools.ChangeBackgroundSelectedShape(listView1);
             if (Mytools.lastShapeNameSelected == "RectangleMissOneWithTails" || Mytools.lastShapeNameSelected == "CurvedRectangleMissOneWithTails")
                 tailsTB.Enabled = true;
             else
@@ -98,9 +98,23 @@ namespace MuradApps
                 heightTB.Enabled = true;
             else
                 heightTB.Enabled = false;
+
+            if (Mytools.lastShapeNameSelected == "SpinnerLines")
+            {
+                var fm = new SpinnerLinesForm();
+                fm.ShowDialog();
+               
+                if (!fm.FilledData())
+                {
+                    Mytools.lastShapeNameSelected = null;
+                    return;
+                }
+            }
+
+            Mytools.ChangeBackgroundSelectedShape(listView1);
         }
 
-        
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -291,6 +305,11 @@ namespace MuradApps
         private void checkBoxMonths_CheckedChanged(object sender, EventArgs e)
         {
             Mytools.FillGridView(dataGridView1, dateTimePicker1, weightLabel, checkBoxMonths);
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
     

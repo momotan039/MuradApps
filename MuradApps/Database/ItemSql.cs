@@ -9,6 +9,9 @@ namespace MuradApps
         //public int qutur { get; set; }
         //public double weight { get; set; }
         //public double totalm { get; set; }
+        public double radiusSpinner { get; set; }
+        public double quturSpinner { get; set; }
+        public double numsSpinner { get; set; }
         public double tails { get; set; }
         public double height { get; set; }
         public double width { get; set; }

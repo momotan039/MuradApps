@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MuradApps.Forms;
+using MuradApps.Shapes_Opjects;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -22,6 +24,7 @@ namespace MuradApps
             1.25,1.63,2.06,2.54,
             3.07,3.97,4.97,6.5,
             15.68};
+        public static SpinnerLines sl=new SpinnerLines(-1,-1,-1);
         public static bool ValidationInputs(ListView listView1, ComboBox comboBox1, TextBox numsTB, TextBox widthTB, TextBox heightTB, TextBox tailsTB)
         {
             if (lastShapeNameSelected == null)
@@ -81,7 +84,7 @@ namespace MuradApps
             {
                 var item = DbContextHelper.Controller.Items.FirstOrDefault(i => i.id == order.idItem);
                 shape = GetShapeByItem(item);
-                double wieght = CalculateWieght(shape.TotalLengthCm() / 100, order);
+                double wieght = CalculateWieght(shape.TotalLengthCm() / 100, order,item);
                 dataGridView1.Rows.Add(
                  item.id,
                  rows++,
@@ -96,12 +99,23 @@ namespace MuradApps
             }
 
             weightLabel.Text = +Math.Round(totalWieght, 2) + ":(kg)סכה\"ל משקל ב";
+
+            //to reset last selected Item
+            lastShapeNameSelected = null;
         }
-        public static double CalculateWieght(double totalM, Order order)
+        public static double CalculateWieght(double totalM, Order order,ItemSql item)
         {
             double weight = 0;
             if (shape is CircularDoubleLine)
                 weight = 0.222 * totalM * order.nums;
+            else if(shape is SpinnerLines)
+            {
+                const double value= 0.00636;
+
+                double spinner = value * Math.Pow(item.quturSpinner, 2) * 2 * Math.PI * item.radiusSpinner*item.numsSpinner;
+                double lines = Math.Pow(order.qutur, 2)*item.width*order.nums*value;
+                weight = spinner + lines;
+            }
             else
             {
                 double weightOfQutur = 0;
@@ -147,7 +161,8 @@ namespace MuradApps
                 shape = new RectangleMissOneWithTails(width, height, tails);
             else if (lastShapeNameSelected == "CurvedRectangleMissOneWithTails")
                 shape = new CurvedRectangleMissOneWithTails(width, height, tails);
-
+            else
+                shape = new SpinnerLines(width,item.quturSpinner,item.radiusSpinner);
             return shape;
         }
         public static void InitListViewShapes(ListView listView1)
@@ -170,6 +185,7 @@ namespace MuradApps
             listView1.Items.Add("Rectangle", 5);
             listView1.Items.Add("RectangleMissOne", 6);
             listView1.Items.Add("RectangleMissOneWithTails", 7);
+            listView1.Items.Add("SpinnerLines", 8);
 
         }
         public static Shape CheckedWhichShapeInit(TextBox widthTB, TextBox tailsTB, TextBox heightTB)
@@ -195,6 +211,8 @@ namespace MuradApps
                 return new RectangleMissOne(width, height);
             else if (lastShapeNameSelected == "RectangleMissOneWithTails")
                 return new RectangleMissOneWithTails(width, height, tails);
+            else if (lastShapeNameSelected == "SpinnerLines")
+                return new SpinnerLines(width,sl.qutur,sl.radius);
             else
                 return new CurvedRectangleMissOneWithTails(width, height, tails);
         }
@@ -203,6 +221,7 @@ namespace MuradApps
         {
             if (lastShapeNameSelected == null)
                 return;
+
             //reset forground color for items
             foreach (ListViewItem item in listView.Items)
             {
