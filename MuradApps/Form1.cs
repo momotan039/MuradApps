@@ -343,7 +343,9 @@ namespace MuradApps
             DataGridView dgv = sender as DataGridView;
 
             if (e.ColumnIndex == dgv.ColumnCount - 1)
-                Cursor = new Cursor("../../../icons/aero_nesw_xl.cur");
+                Cursor = Cursors.Hand;
+            else
+                Cursor= Cursors.Default;
         }
 
     }
