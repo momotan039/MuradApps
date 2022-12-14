@@ -28,7 +28,7 @@ namespace MuradApps
             base.OnLoad(e);
             comboBox1.Items.AddRange(Mytools.quturs);
             Mytools.InitListViewShapes(listView1);
-            Mytools.FillGridView(dataGridView1,dateTimePicker1,weightLabel,checkBoxMonths);
+            Mytools.FillGridView(dataGridView1, dateTimePicker1, weightLabel, checkBoxMonths);
             leftPanel.AutoScroll = false;
             leftPanel.HorizontalScroll.Enabled = false;
             leftPanel.HorizontalScroll.Visible = false;
@@ -36,50 +36,54 @@ namespace MuradApps
             leftPanel.AutoScroll = true;
             Mytools.ChangeBackgroundSelectedShape(listView1);
         }
-      
+
         private void AddBtn_Click(object sender, EventArgs e)
         {
             //check if not empty inputs 
-            if (!Mytools.ValidationInputs(listView1,comboBox1,numsTB,widthTB,heightTB,tailsTB))
+            if (!Mytools.ValidationInputs(listView1, comboBox1, numsTB, widthTB, heightTB, tailsTB))
                 return;
 
             //get shape by selected image
-            Mytools.shape = Mytools.CheckedWhichShapeInit(widthTB,tailsTB,heightTB);
+            Mytools.shape = Mytools.CheckedWhichShapeInit(widthTB, tailsTB, heightTB);
 
             double totalM = Mytools.shape.TotalLengthCm() / 100;
-            double tails=0, height=0,quturSpinner=0,radiusSpinner=0, widthSpinner = 0;
+            double tails = 0, height = 0, quturSpinner = 0, radiusSpinner = 0, widthSpinner = 0;
 
             if (Mytools.shape is RectangleMissOneWithTails)
-                tails= (Mytools.shape as RectangleMissOneWithTails).tails;
+                tails = (Mytools.shape as RectangleMissOneWithTails).tails;
             if (Mytools.shape is DoubleLine)
                 height = (Mytools.shape as DoubleLine).height;
             else if (Mytools.shape is LightingStrike)
                 height = (Mytools.shape as LightingStrike).curvedHeight;
-            
-            var item = new ItemSql { 
-            width = Mytools.shape.width,
-            tails=tails,
-            height=height,
-            nameShape =Mytools.lastShapeNameSelected,
-            quturSpinner=Mytools.shape is SpinnerLines? (Mytools.shape as SpinnerLines).qutur:0,
-            radiusSpinner = Mytools.shape is SpinnerLines ? (Mytools.shape as SpinnerLines).radius : 0,
+
+            var item = new ItemSql
+            {
+                width = Mytools.shape.width,
+                tails = tails,
+                height = height,
+                nameShape = Mytools.lastShapeNameSelected,
+                quturSpinner = Mytools.shape is SpinnerLines ? (Mytools.shape as SpinnerLines).qutur : 0,
+                radiusSpinner = Mytools.shape is SpinnerLines ? (Mytools.shape as SpinnerLines).radius : 0,
+                numsSpinner = Mytools.shape is SpinnerLines ? (Mytools.shape as SpinnerLines).nums : 0,
             };
+
             //add item to database
             DbContextHelper.Controller.Items.Add(item);
             DbContextHelper.Controller.SaveChanges();
-           //int idLastItem = DbContextHelper.Controller.Items.OrderBy(o=>o.id).LastOrDefault().id;
-           item = DbContextHelper.Controller.Items.OrderByDescending(i=>i.id).FirstOrDefault();
+            //int idLastItem = DbContextHelper.Controller.Items.OrderBy(o=>o.id).LastOrDefault().id;
+            item = DbContextHelper.Controller.Items.OrderByDescending(i => i.id).FirstOrDefault();
             //add order to database
             DbContextHelper.Controller.Orders.Add(new Order
-            {   date=dateTimePicker1.Value,
+            {
+                date = dateTimePicker1.Value,
                 idItem = item.id,
-                nums= int.Parse(numsTB.Text),
-                qutur=int.Parse(comboBox1.SelectedItem + "")
+                nums = int.Parse(numsTB.Text),
+                qutur = int.Parse(comboBox1.SelectedItem + "")
             });
             DbContextHelper.Controller.SaveChanges();
-            Mytools.FillGridView(dataGridView1, dateTimePicker1, weightLabel,checkBoxMonths);
+            Mytools.FillGridView(dataGridView1, dateTimePicker1, weightLabel, checkBoxMonths);
         }
-        
+
         private void button2_Click(object sender, EventArgs e)
         {
             listView1.Visible = true;
@@ -90,11 +94,14 @@ namespace MuradApps
         private void listView1_MouseClick(object sender, MouseEventArgs e)
         {
             Mytools.lastShapeNameSelected = listView1.SelectedItems[0].SubItems[0].Text;
+
             if (Mytools.lastShapeNameSelected == "RectangleMissOneWithTails" || Mytools.lastShapeNameSelected == "CurvedRectangleMissOneWithTails")
                 tailsTB.Enabled = true;
             else
                 tailsTB.Enabled = false;
-            if (Mytools.lastShapeNameSelected != "Line")
+
+
+            if (Mytools.lastShapeNameSelected != "Line" && Mytools.lastShapeNameSelected != "SpinnerLines")
                 heightTB.Enabled = true;
             else
                 heightTB.Enabled = false;
@@ -102,8 +109,9 @@ namespace MuradApps
             if (Mytools.lastShapeNameSelected == "SpinnerLines")
             {
                 var fm = new SpinnerLinesForm();
+                fm.StartPosition = FormStartPosition.CenterScreen;
                 fm.ShowDialog();
-               
+
                 if (!fm.FilledData())
                 {
                     Mytools.lastShapeNameSelected = null;
@@ -128,24 +136,24 @@ namespace MuradApps
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             var r = dataGridView1.CurrentRow;
-            if(r!=null)
-            MessageBox.Show(r.Index + "");
+            if (r != null)
+                MessageBox.Show(r.Index + "");
         }
 
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-           
+
         }
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
-           var rows= dataGridView1.SelectedRows;
-            if(rows.Count == 0)
+            var rows = dataGridView1.SelectedRows;
+            if (rows.Count == 0)
             {
                 MessageBox.Show("נא לבחור שורה בכדי להמשיך");
                 return;
             }
-            var res = MessageBox.Show("האם ברצונך להמשיך","סים לב",MessageBoxButtons.YesNo);
+            var res = MessageBox.Show("האם ברצונך להמשיך", "סים לב", MessageBoxButtons.YesNo);
             if (res == DialogResult.No)
                 return;
             else
@@ -163,20 +171,20 @@ namespace MuradApps
                     }
                 }
                 MessageBox.Show("הפעולה פוצעה בהצלחה");
-                Mytools.FillGridView(dataGridView1, dateTimePicker1, weightLabel,checkBoxMonths);
+                Mytools.FillGridView(dataGridView1, dateTimePicker1, weightLabel, checkBoxMonths);
             }
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-           Mytools.FillGridView(dataGridView1,dateTimePicker1, weightLabel,checkBoxMonths);
+            Mytools.FillGridView(dataGridView1, dateTimePicker1, weightLabel, checkBoxMonths);
             //dateTimePicker1.Visible = false;
             //dateTimePicker1.Visible = true;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            
+
         }
 
         private void button2_Click_1(object sender, EventArgs e)
@@ -188,7 +196,7 @@ namespace MuradApps
             sfd.ShowDialog();
             if (sfd.FileName == "")
                 return;
-            
+
             ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
             ExcelPackage excel = new ExcelPackage();
             // name of the sheet
@@ -198,32 +206,32 @@ namespace MuradApps
             workSheet.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             workSheet.Row(1).Style.Font.Bold = true;
             workSheet.Row(1).Style.Font.Size = 25;
-            workSheet.Row(1).Style.VerticalAlignment= ExcelVerticalAlignment.Center;
+            workSheet.Row(1).Style.VerticalAlignment = ExcelVerticalAlignment.Center;
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
-                workSheet.Row(i+2).Height = 100;
-                workSheet.Row(i+2).Style.Font.Size = 20;
-                workSheet.Row(i+2).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                workSheet.Row(i + 2).Height = 100;
+                workSheet.Row(i + 2).Style.Font.Size = 20;
+                workSheet.Row(i + 2).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 workSheet.Row(i + 2).Style.VerticalAlignment = ExcelVerticalAlignment.Center;
             }
             //add header text
             for (int i = 1; i < dataGridView1.Columns.Count; i++)
             {
-                workSheet.Cells[1,i].Value = dataGridView1.Columns[i].HeaderText;
+                workSheet.Cells[1, i].Value = dataGridView1.Columns[i].HeaderText;
             }
             //create New Folder to save temp pictures
             Directory.CreateDirectory("tempFolder");
             // add rows text
             for (int r = 0; r < dataGridView1.Rows.Count; r++)
             {
-                for (int c = 0; c < dataGridView1.Columns.Count-1; c++)
+                for (int c = 0; c < dataGridView1.Columns.Count - 1; c++)
                 {
                     object val = dataGridView1.Rows[r].Cells[c + 1].Value;
-                    if(val is Image)
+                    if (val is Image)
                     {
                         //save image to current  folder
-                        var img = dataGridView1.Rows[r].Cells[c+1].Value as Bitmap;
-                        string path = "tempFolder/imgExcel"+r+".png";
+                        var img = dataGridView1.Rows[r].Cells[c + 1].Value as Bitmap;
+                        string path = "tempFolder/imgExcel" + r + ".png";
                         try
                         {
                             img.Save(path);
@@ -239,10 +247,10 @@ namespace MuradApps
                         var pic = workSheet.Drawings.AddPicture(r + 1 + "", path);
                         //customize image
                         pic.From.Column = c;
-                        pic.From.Row = r+1;
-                        pic.SetSize(162,135);
+                        pic.From.Row = r + 1;
+                        pic.SetSize(162, 135);
 
-                       
+
                     }
                     else
                     {
@@ -253,10 +261,10 @@ namespace MuradApps
             //add weight to end last row in file excel
             int lastRow = dataGridView1.RowCount + 2;
 
-            workSheet.Cells[lastRow,1,lastRow,10].Merge=true;
-            workSheet.Row(lastRow).Style.Font.Bold=true;
-            workSheet.Row(lastRow).Style.Font.Size=28;
-            workSheet.Row(lastRow).Style.HorizontalAlignment= ExcelHorizontalAlignment.Center;
+            workSheet.Cells[lastRow, 1, lastRow, 10].Merge = true;
+            workSheet.Row(lastRow).Style.Font.Bold = true;
+            workSheet.Row(lastRow).Style.Font.Size = 28;
+            workSheet.Row(lastRow).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             workSheet.Cells[lastRow, 1].Value = weightLabel.Text;
 
             // set to auto fit for the content
@@ -268,7 +276,7 @@ namespace MuradApps
             }
 
             // file name with .xlsx extension 
-            
+
 
             if (File.Exists(sfd.FileName))
                 File.Delete(sfd.FileName);
@@ -291,11 +299,11 @@ namespace MuradApps
             MessageBox.Show("הקובץ נשמר בהצלחה");
         }
 
-      
+
 
         private void dateTimePicker1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar ==((char)Keys.Enter))
+            if (e.KeyChar == ((char)Keys.Enter))
             {
                 dataGridView1.Focus();
             }
@@ -311,6 +319,32 @@ namespace MuradApps
         {
 
         }
+
+        private void dataGridView1_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+
+            if (dgv.SelectedCells[0].ColumnIndex == dgv.ColumnCount - 1)
+            {
+                Image img = dgv.SelectedCells[0].Value as Image;
+
+                var fm = new PopUpImageForm(img);
+                fm.StartPosition = FormStartPosition.CenterScreen;
+                fm.ShowDialog();
+            }
+
+        }
+
+
+
+
+        private void dataGridView1_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+
+            if (e.ColumnIndex == dgv.ColumnCount - 1)
+                Cursor = new Cursor("../../../icons/aero_nesw_xl.cur");
+        }
+
     }
-    
 }

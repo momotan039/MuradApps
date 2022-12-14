@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\MOHAMMED\\source\\repos\\MuradApps\\MuradApps\\MuradApps.csproj": {}
+    "C:\\Users\\momotan\\source\\repos\\MuradApps\\MuradApps\\MuradApps\\MuradApps.csproj": {}
   },
   "projects": {
-    "C:\\Users\\MOHAMMED\\source\\repos\\MuradApps\\MuradApps\\MuradApps.csproj": {
+    "C:\\Users\\momotan\\source\\repos\\MuradApps\\MuradApps\\MuradApps\\MuradApps.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MOHAMMED\\source\\repos\\MuradApps\\MuradApps\\MuradApps.csproj",
+        "projectUniqueName": "C:\\Users\\momotan\\source\\repos\\MuradApps\\MuradApps\\MuradApps\\MuradApps.csproj",
         "projectName": "MuradApps",
-        "projectPath": "C:\\Users\\MOHAMMED\\source\\repos\\MuradApps\\MuradApps\\MuradApps.csproj",
-        "packagesPath": "C:\\Users\\MOHAMMED\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MOHAMMED\\source\\repos\\MuradApps\\MuradApps\\obj\\",
+        "projectPath": "C:\\Users\\momotan\\source\\repos\\MuradApps\\MuradApps\\MuradApps\\MuradApps.csproj",
+        "packagesPath": "C:\\Users\\momotan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\momotan\\source\\repos\\MuradApps\\MuradApps\\MuradApps\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\MOHAMMED\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\momotan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

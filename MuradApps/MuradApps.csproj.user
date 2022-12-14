@@ -5,6 +5,9 @@
     <Compile Update="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\PopUpImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\SpinnerLinesForm.cs">
       <SubType>Form</SubType>
     </Compile>

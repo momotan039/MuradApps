@@ -34,12 +34,18 @@ namespace MuradApps.Forms
 
             Mytools.sl.qutur= double.Parse(quturSpinnerTB.Text);
             Mytools.sl.radius=double.Parse(radiusSpinnerTB.Text);
+            Mytools.sl.nums=double.Parse(numsTb.Text);
             Close();
         }
 
         public bool FilledData()
         {
             return !noDataPassed;
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

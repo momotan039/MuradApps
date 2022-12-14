@@ -24,7 +24,7 @@ namespace MuradApps
             1.25,1.63,2.06,2.54,
             3.07,3.97,4.97,6.5,
             15.68};
-        public static SpinnerLines sl=new SpinnerLines(-1,-1,-1);
+        public static SpinnerLines sl=new SpinnerLines(-1,-1,-1,-1);
         public static bool ValidationInputs(ListView listView1, ComboBox comboBox1, TextBox numsTB, TextBox widthTB, TextBox heightTB, TextBox tailsTB)
         {
             if (lastShapeNameSelected == null)
@@ -162,7 +162,7 @@ namespace MuradApps
             else if (lastShapeNameSelected == "CurvedRectangleMissOneWithTails")
                 shape = new CurvedRectangleMissOneWithTails(width, height, tails);
             else
-                shape = new SpinnerLines(width,item.quturSpinner,item.radiusSpinner);
+                shape = new SpinnerLines(width,item.quturSpinner,item.radiusSpinner,item.numsSpinner);
             return shape;
         }
         public static void InitListViewShapes(ListView listView1)
@@ -212,7 +212,7 @@ namespace MuradApps
             else if (lastShapeNameSelected == "RectangleMissOneWithTails")
                 return new RectangleMissOneWithTails(width, height, tails);
             else if (lastShapeNameSelected == "SpinnerLines")
-                return new SpinnerLines(width,sl.qutur,sl.radius);
+                return new SpinnerLines(width,sl.qutur,sl.radius,sl.nums);
             else
                 return new CurvedRectangleMissOneWithTails(width, height, tails);
         }

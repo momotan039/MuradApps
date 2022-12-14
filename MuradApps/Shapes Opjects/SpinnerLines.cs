@@ -9,19 +9,23 @@ namespace MuradApps.Shapes_Opjects
     {
         public double qutur;
         public double radius;
+        public double nums;
 
-        public SpinnerLines(double width,double quturSpinner, double radiusSpinner) : base(width)
+        public SpinnerLines(double width,double quturSpinner, double radiusSpinner,double numsSpinner) : base(width)
         {
             InitlizeImage();
-            this.qutur = quturSpinner;
-            this.radius = radiusSpinner;
+            qutur = quturSpinner;
+            radius = radiusSpinner;
+            nums = numsSpinner;
         }
         public override Image CustomizeImage()
         {
             Graphics g = Graphics.FromImage(img);
-            Font f = new Font("tahoma", 70, FontStyle.Bold);
+            Font f = new Font("tahoma", 30, FontStyle.Regular);
             Brush b = Brushes.Red;
-            g.DrawString(width + "", f, b, new PointF(300, 40));
+            g.DrawString("T : "+qutur, f, b, new PointF(0, 40));
+            g.DrawString("n : "+nums, f, b, new PointF(200, 40));
+            g.DrawString("r : "+radius, f, b, new PointF(400, 40));
             g.Dispose();
             return img;
         }
