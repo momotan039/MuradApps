@@ -33,6 +33,11 @@ namespace MuradApps
                 listView1.Focus();
                 return false;
             }
+
+            //if shape is spinner skip all
+            if (lastShapeNameSelected=="Spinner")
+                return true;
+
             if (comboBox1.SelectedItem == null || !int.TryParse(comboBox1.SelectedItem.ToString(), out int d))
             {
                 MessageBox.Show("נא לבחור את הקוטר");
@@ -99,22 +104,22 @@ namespace MuradApps
             }
 
             weightLabel.Text = +Math.Round(totalWieght, 2) + ":(kg)סכה\"ל משקל ב";
-
-            //to reset last selected Item
-            lastShapeNameSelected = null;
         }
         public static double CalculateWieght(double totalM, Order order,ItemSql item)
         {
             double weight = 0;
             if (shape is CircularDoubleLine)
                 weight = 0.222 * totalM * order.nums;
-            else if(shape is SpinnerLines)
+           
+            else if(shape is Spinner)
             {
                 const double value= 0.00636;
-
                 double spinner = value * Math.Pow(item.quturSpinner, 2) * 2 * Math.PI * item.radiusSpinner*item.numsSpinner;
-                double lines = Math.Pow(order.qutur, 2)*item.width*order.nums*value;
-                weight = spinner + lines;
+
+                if (shape is SpinnerLines)
+                    weight = spinner + Math.Pow(order.qutur, 2) * totalM * order.nums * value;
+                else
+                    weight = spinner;
             }
             else
             {
@@ -161,8 +166,10 @@ namespace MuradApps
                 shape = new RectangleMissOneWithTails(width, height, tails);
             else if (lastShapeNameSelected == "CurvedRectangleMissOneWithTails")
                 shape = new CurvedRectangleMissOneWithTails(width, height, tails);
+            else if (lastShapeNameSelected == "Spinner")
+                shape = new Spinner(width, item.quturSpinner, item.radiusSpinner, item.numsSpinner);
             else
-                shape = new SpinnerLines(width,item.quturSpinner,item.radiusSpinner,item.numsSpinner);
+                shape = new SpinnerLines(width, item.quturSpinner, item.radiusSpinner, item.numsSpinner);
             return shape;
         }
         public static void InitListViewShapes(ListView listView1)
@@ -177,25 +184,21 @@ namespace MuradApps
                 imgs.Images.Add(Image.FromFile(path));
             }
             listView1.LargeImageList = imgs;
-            listView1.Items.Add("CircularDoubleLine", 0);
-            listView1.Items.Add("CurvedRectangleMissOneWithTails", 1);
-            listView1.Items.Add("DoubleLine", 2);
-            listView1.Items.Add("LightingStrike", 3);
-            listView1.Items.Add("Line", 4);
-            listView1.Items.Add("Rectangle", 5);
-            listView1.Items.Add("RectangleMissOne", 6);
-            listView1.Items.Add("RectangleMissOneWithTails", 7);
-            listView1.Items.Add("SpinnerLines", 8);
-
+            foreach (string path in paths)
+            {
+            }
+            for (int i = 0; i < paths.Length; i++)
+            {
+                string name=Path.GetFileNameWithoutExtension(paths[i]);
+                listView1.Items.Add(name,i);
+            }
         }
         public static Shape CheckedWhichShapeInit(TextBox widthTB, TextBox tailsTB, TextBox heightTB)
         {
             double width = 0, height = 0, tails = 0;
-            width = double.Parse(widthTB.Text);
-            if (tailsTB.Text != "")
-                tails = double.Parse(tailsTB.Text);
-            if (heightTB.Text != "")
-                height = double.Parse(heightTB.Text);
+            double.TryParse(widthTB.Text,out width);
+            double.TryParse(tailsTB.Text,out tails);
+            double.TryParse(heightTB.Text,out height);
 
             if (lastShapeNameSelected == "Line")
                 return new Line(width);
@@ -213,6 +216,8 @@ namespace MuradApps
                 return new RectangleMissOneWithTails(width, height, tails);
             else if (lastShapeNameSelected == "SpinnerLines")
                 return new SpinnerLines(width,sl.qutur,sl.radius,sl.nums);
+            else if (lastShapeNameSelected == "Spinner")
+                return new Spinner(width,sl.qutur, sl.radius, sl.nums);
             else
                 return new CurvedRectangleMissOneWithTails(width, height, tails);
         }

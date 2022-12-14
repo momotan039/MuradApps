@@ -1,6 +1,6 @@
 ﻿namespace MuradApps.Forms
 {
-    partial class SpinnerLinesForm
+    partial class SpinnerForm
     {
         /// <summary>
         /// Required designer variable.
@@ -42,19 +42,19 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Showcard Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(192, 18);
+            this.label1.Location = new System.Drawing.Point(219, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(187, 30);
+            this.label1.Size = new System.Drawing.Size(253, 37);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Spinner Lines";
+            this.label1.Text = "Spinner Panel";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(388, 92);
+            this.label4.Location = new System.Drawing.Point(443, 123);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 24);
+            this.label4.Size = new System.Drawing.Size(111, 29);
             this.label4.TabIndex = 5;
             this.label4.Text = "סביבות r ";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -64,19 +64,18 @@
             this.radiusSpinnerTB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.radiusSpinnerTB.Font = new System.Drawing.Font("Showcard Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.radiusSpinnerTB.ForeColor = System.Drawing.Color.White;
-            this.radiusSpinnerTB.Location = new System.Drawing.Point(154, 92);
-            this.radiusSpinnerTB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.radiusSpinnerTB.Location = new System.Drawing.Point(176, 123);
             this.radiusSpinnerTB.Name = "radiusSpinnerTB";
-            this.radiusSpinnerTB.Size = new System.Drawing.Size(213, 33);
+            this.radiusSpinnerTB.Size = new System.Drawing.Size(243, 40);
             this.radiusSpinnerTB.TabIndex = 4;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(407, 135);
+            this.label2.Location = new System.Drawing.Point(465, 180);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 24);
+            this.label2.Size = new System.Drawing.Size(62, 29);
             this.label2.TabIndex = 7;
             this.label2.Text = "קוטר";
             // 
@@ -85,19 +84,17 @@
             this.quturSpinnerTB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.quturSpinnerTB.Font = new System.Drawing.Font("Showcard Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.quturSpinnerTB.ForeColor = System.Drawing.Color.White;
-            this.quturSpinnerTB.Location = new System.Drawing.Point(154, 134);
-            this.quturSpinnerTB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.quturSpinnerTB.Location = new System.Drawing.Point(176, 179);
             this.quturSpinnerTB.Name = "quturSpinnerTB";
-            this.quturSpinnerTB.Size = new System.Drawing.Size(213, 33);
+            this.quturSpinnerTB.Size = new System.Drawing.Size(243, 40);
             this.quturSpinnerTB.TabIndex = 6;
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Showcard Gothic", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(218, 250);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Location = new System.Drawing.Point(249, 333);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(161, 45);
+            this.button1.Size = new System.Drawing.Size(184, 60);
             this.button1.TabIndex = 8;
             this.button1.Text = "המשך";
             this.button1.UseVisualStyleBackColor = true;
@@ -108,28 +105,27 @@
             this.numsTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.numsTb.Font = new System.Drawing.Font("Showcard Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.numsTb.ForeColor = System.Drawing.Color.White;
-            this.numsTb.Location = new System.Drawing.Point(154, 181);
-            this.numsTb.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.numsTb.Location = new System.Drawing.Point(176, 241);
             this.numsTb.Name = "numsTb";
-            this.numsTb.Size = new System.Drawing.Size(213, 33);
+            this.numsTb.Size = new System.Drawing.Size(243, 40);
             this.numsTb.TabIndex = 6;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(380, 182);
+            this.label3.Location = new System.Drawing.Point(434, 243);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(105, 24);
+            this.label3.Size = new System.Drawing.Size(130, 29);
             this.label3.TabIndex = 7;
             this.label3.Text = "מס\' סביבות";
             // 
-            // SpinnerLinesForm
+            // SpinnerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.CadetBlue;
-            this.ClientSize = new System.Drawing.Size(550, 382);
+            this.ClientSize = new System.Drawing.Size(629, 509);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -138,8 +134,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.radiusSpinnerTB);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "SpinnerLinesForm";
+            this.Name = "SpinnerForm";
             this.Text = "Spinner Lines";
             this.ResumeLayout(false);
             this.PerformLayout();

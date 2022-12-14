@@ -14,6 +14,7 @@ namespace MuradApps
         {
             this.width = width;
         }
+       
         protected abstract void InitlizeImage();
         
         public abstract Image CustomizeImage();

@@ -9,10 +9,10 @@ using System.Windows.Forms;
 
 namespace MuradApps.Forms
 {
-    public partial class SpinnerLinesForm : Form
+    public partial class SpinnerForm : Form
     {
         private bool noDataPassed=true;
-        public SpinnerLinesForm()
+        public SpinnerForm()
         {
             InitializeComponent();
         }

@@ -5,14 +5,13 @@ using System.Text;
 
 namespace MuradApps.Shapes_Opjects
 {
-    internal class SpinnerLines : Spinner
+    internal class Spinner : Shape
     {
         public double qutur;
         public double radius;
         public double nums;
 
-        public SpinnerLines(double width,double quturSpinner, double radiusSpinner,double numsSpinner) 
-            : base(width,quturSpinner,radiusSpinner,numsSpinner)
+        public Spinner(double width,double quturSpinner, double radiusSpinner,double numsSpinner) : base(width)
         {
             InitlizeImage();
             qutur = quturSpinner;
@@ -22,11 +21,11 @@ namespace MuradApps.Shapes_Opjects
         public override Image CustomizeImage()
         {
             Graphics g = Graphics.FromImage(img);
-            Font f = new Font("tahoma", 30, FontStyle.Regular);
+            Font f = new Font("tahoma", 20, FontStyle.Regular);
             Brush b = Brushes.Red;
-            g.DrawString("T : "+qutur, f, b, new PointF(0, 40));
-            g.DrawString("n : "+nums, f, b, new PointF(200, 40));
-            g.DrawString("r : "+radius, f, b, new PointF(400, 40));
+            g.DrawString("T : "+qutur, f, b, new PointF(0, 10));
+            g.DrawString("n : "+nums, f, b, new PointF(120, 10));
+            g.DrawString("r : "+radius, f, b, new PointF(240, 10));
             g.Dispose();
             return img;
         }
@@ -36,7 +35,7 @@ namespace MuradApps.Shapes_Opjects
         }
         protected override void InitlizeImage()
         {
-            this.img = Image.FromFile(@"../../../images/SpinnerLines.png");
+            this.img = Image.FromFile(@"../../../images/Spinner.png");
         }
     }
 }

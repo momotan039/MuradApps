@@ -17,7 +17,7 @@ namespace MuradApps
 {
     public partial class Form1 : Form
     {
-
+        SpinnerForm spinnerLinesForm = new SpinnerForm();
         public Form1()
         {
             InitializeComponent();
@@ -58,13 +58,13 @@ namespace MuradApps
 
             var item = new ItemSql
             {
-                width = Mytools.shape.width,
+                width =Mytools.shape is Spinner && !(Mytools.shape is SpinnerLines) ?0:Mytools.shape.width,
                 tails = tails,
                 height = height,
                 nameShape = Mytools.lastShapeNameSelected,
-                quturSpinner = Mytools.shape is SpinnerLines ? (Mytools.shape as SpinnerLines).qutur : 0,
-                radiusSpinner = Mytools.shape is SpinnerLines ? (Mytools.shape as SpinnerLines).radius : 0,
-                numsSpinner = Mytools.shape is SpinnerLines ? (Mytools.shape as SpinnerLines).nums : 0,
+                quturSpinner = Mytools.shape is Spinner ? (Mytools.shape as Spinner).qutur : 0,
+                radiusSpinner = Mytools.shape is Spinner ? (Mytools.shape as Spinner).radius : 0,
+                numsSpinner = Mytools.shape is Spinner ? (Mytools.shape as Spinner).nums : 0,
             };
 
             //add item to database
@@ -73,13 +73,24 @@ namespace MuradApps
             //int idLastItem = DbContextHelper.Controller.Items.OrderBy(o=>o.id).LastOrDefault().id;
             item = DbContextHelper.Controller.Items.OrderByDescending(i => i.id).FirstOrDefault();
             //add order to database
+            
+            if(Mytools.shape is Spinner &&  !(Mytools.shape is SpinnerLines))
+                DbContextHelper.Controller.Orders.Add(new Order
+                {
+                    date = dateTimePicker1.Value,
+                    idItem = item.id,
+                    nums =0,
+                    qutur =0
+                });
+            else
             DbContextHelper.Controller.Orders.Add(new Order
             {
                 date = dateTimePicker1.Value,
                 idItem = item.id,
-                nums = int.Parse(numsTB.Text),
-                qutur = int.Parse(comboBox1.SelectedItem + "")
+                nums =int.Parse(numsTB.Text),
+                qutur =int.Parse(comboBox1.SelectedItem.ToString())
             });
+
             DbContextHelper.Controller.SaveChanges();
             Mytools.FillGridView(dataGridView1, dateTimePicker1, weightLabel, checkBoxMonths);
         }
@@ -95,6 +106,9 @@ namespace MuradApps
         {
             Mytools.lastShapeNameSelected = listView1.SelectedItems[0].SubItems[0].Text;
 
+
+            
+
             if (Mytools.lastShapeNameSelected == "RectangleMissOneWithTails" || Mytools.lastShapeNameSelected == "CurvedRectangleMissOneWithTails")
                 tailsTB.Enabled = true;
             else
@@ -106,17 +120,15 @@ namespace MuradApps
             else
                 heightTB.Enabled = false;
 
-            if (Mytools.lastShapeNameSelected == "SpinnerLines")
-            {
-                var fm = new SpinnerLinesForm();
-                fm.StartPosition = FormStartPosition.CenterScreen;
-                fm.ShowDialog();
 
-                if (!fm.FilledData())
-                {
-                    Mytools.lastShapeNameSelected = null;
+
+            if (Mytools.lastShapeNameSelected == "SpinnerLines" || Mytools.lastShapeNameSelected == "Spinner")
+            {
+                spinnerLinesForm.StartPosition = FormStartPosition.CenterScreen;
+                spinnerLinesForm.ShowDialog();
+
+                if (!spinnerLinesForm.FilledData())
                     return;
-                }
             }
 
             Mytools.ChangeBackgroundSelectedShape(listView1);
@@ -161,7 +173,7 @@ namespace MuradApps
                 foreach (DataGridViewRow r in rows)
                 {
                     int id = int.Parse(r.Cells[0].Value + "");
-                    var order = DbContextHelper.Controller.Orders.FirstOrDefault(o => o.id == id);
+                    var order = DbContextHelper.Controller.Orders.FirstOrDefault(o => o.idItem == id);
                     var item = DbContextHelper.Controller.Items.FirstOrDefault(i => i.id == order.idItem);
                     if (item != null)
                     {
@@ -348,5 +360,6 @@ namespace MuradApps
                 Cursor= Cursors.Default;
         }
 
+       
     }
 }
