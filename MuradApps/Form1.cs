@@ -106,23 +106,39 @@ namespace MuradApps
         {
             Mytools.lastShapeNameSelected = listView1.SelectedItems[0].SubItems[0].Text;
 
+            widthTB.Enabled = true;
+            heightTB.Enabled = true;
+            numsTB.Enabled = true;
+            tailsTB.Enabled = true;
+            comboBox1.Enabled = true;
 
-            
+            if (Mytools.lastShapeNameSelected== "Spinner")
+            {
+                widthTB.Enabled = false;
+                heightTB.Enabled = false;
+                numsTB.Enabled = false;
+                tailsTB.Enabled = false;
+                comboBox1.Enabled = false;
+            }
 
-            if (Mytools.lastShapeNameSelected == "RectangleMissOneWithTails" || Mytools.lastShapeNameSelected == "CurvedRectangleMissOneWithTails")
+            //fix height
+            if (Mytools.lastShapeNameSelected == "Line" 
+                || Mytools.lastShapeNameSelected == "SpinnerLines")
+                heightTB.Enabled = false;
+
+            //fix tails
+            if (Mytools.lastShapeNameSelected == "RectangleMissOneWithTails" 
+                || Mytools.lastShapeNameSelected == "CurvedRectangleMissOneWithTails")
                 tailsTB.Enabled = true;
             else
                 tailsTB.Enabled = false;
 
 
-            if (Mytools.lastShapeNameSelected != "Line" && Mytools.lastShapeNameSelected != "SpinnerLines")
-                heightTB.Enabled = true;
-            else
-                heightTB.Enabled = false;
 
 
 
-            if (Mytools.lastShapeNameSelected == "SpinnerLines" || Mytools.lastShapeNameSelected == "Spinner")
+            if (Mytools.lastShapeNameSelected == "SpinnerLines" 
+                || Mytools.lastShapeNameSelected == "Spinner")
             {
                 spinnerLinesForm.StartPosition = FormStartPosition.CenterScreen;
                 spinnerLinesForm.ShowDialog();

@@ -16,9 +16,9 @@ namespace MuradApps
         public override Image CustomizeImage()
         {
             Graphics g = Graphics.FromImage(img);
-            Font f = new Font("tahoma", 70, FontStyle.Bold);
+            Font f = new Font("tahoma", 50, FontStyle.Bold);
             Brush b = Brushes.Red;
-            g.DrawString(width + "", f, b, new PointF(300, 150));
+            g.DrawString(width + "", f, b, new PointF(300, 250));
             g.DrawString(height + "", f, b, new PointF(50, 40));
             g.Dispose();
             return img;

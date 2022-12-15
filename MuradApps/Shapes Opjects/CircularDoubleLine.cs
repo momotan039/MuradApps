@@ -16,8 +16,7 @@ namespace MuradApps
             Font f = new Font("tahoma", 50, FontStyle.Bold);
             Brush b = Brushes.Red;
             g.DrawString(width + "", f, b, new PointF(500, 50));
-            g.DrawString(width + "", f, b, new PointF(500, 380));
-            g.DrawString(height + "", f, b, new PointF(-15, 250));
+            g.DrawString(height + "", f, b, new PointF(150, 230));
             g.Dispose();
             return img;
         }

@@ -206,7 +206,6 @@ C:\Users\momotan\source\repos\MuradApps\MuradApps\MuradApps\bin\Debug\netcoreapp
 C:\Users\momotan\source\repos\MuradApps\MuradApps\MuradApps\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
 C:\Users\momotan\source\repos\MuradApps\MuradApps\MuradApps\obj\Debug\netcoreapp3.1\MuradApps.csproj.AssemblyReference.cache
 C:\Users\momotan\source\repos\MuradApps\MuradApps\MuradApps\obj\Debug\netcoreapp3.1\MuradApps.Form1.resources
-C:\Users\momotan\source\repos\MuradApps\MuradApps\MuradApps\obj\Debug\netcoreapp3.1\MuradApps.Forms.SpinnerLinesForm.resources
 C:\Users\momotan\source\repos\MuradApps\MuradApps\MuradApps\obj\Debug\netcoreapp3.1\MuradApps.csproj.GenerateResource.cache
 C:\Users\momotan\source\repos\MuradApps\MuradApps\MuradApps\obj\Debug\netcoreapp3.1\MuradApps.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\momotan\source\repos\MuradApps\MuradApps\MuradApps\obj\Debug\netcoreapp3.1\MuradApps.AssemblyInfoInputs.cache
@@ -293,3 +292,4 @@ C:\Users\MOHAMMED\source\repos\MuradApps\MuradApps\MuradApps\obj\Debug\netcoreap
 C:\Users\MOHAMMED\source\repos\MuradApps\MuradApps\MuradApps\obj\Debug\netcoreapp3.1\MuradApps.pdb
 C:\Users\MOHAMMED\source\repos\MuradApps\MuradApps\MuradApps\obj\Debug\netcoreapp3.1\MuradApps.genruntimeconfig.cache
 C:\Users\MOHAMMED\source\repos\MuradApps\MuradApps\MuradApps\obj\Debug\netcoreapp3.1\MuradApps.Forms.SpinnerForm.resources
+C:\Users\momotan\source\repos\MuradApps\MuradApps\MuradApps\obj\Debug\netcoreapp3.1\MuradApps.Forms.SpinnerForm.resources

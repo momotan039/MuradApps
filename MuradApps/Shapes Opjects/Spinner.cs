@@ -25,7 +25,7 @@ namespace MuradApps.Shapes_Opjects
             Brush b = Brushes.Red;
             g.DrawString("T : "+qutur, f, b, new PointF(0, 10));
             g.DrawString("n : "+nums, f, b, new PointF(120, 10));
-            g.DrawString("r : "+radius, f, b, new PointF(240, 10));
+            g.DrawString("r : "+radius, f, b, new PointF(280, 10));
             g.Dispose();
             return img;
         }
